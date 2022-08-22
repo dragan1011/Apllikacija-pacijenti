@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400;500;600;700&display=swap');
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  align-items: center;
+  padding-top: 10rem;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  font-family: 'DynaPuff', cursive;
+  
+}
+
+.search-jmbg, .search-firstname, .search-lastname{
+  margin-right: 1rem;
+  height: 1rem;
+  border-radius: 5px;
+  font-family: 'DynaPuff', cursive;
+}
+
+.search-trazi{
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'DynaPuff', cursive;
+  font-weight: 500;
+  margin-right: 1rem;
+}
+.dodaj{
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'DynaPuff', cursive;
+  font-weight: 500;
+}
+
+
