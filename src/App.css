@@ -5,35 +5,81 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #adadad;
   min-height: 100vh;
   align-items: center;
-  padding-top: 10rem;
   font-size: calc(10px + 2vmin);
   color: white;
   font-family: 'DynaPuff', cursive;
-  
+  padding-top: 10rem;
 }
-
+.patients{
+  position: relative;
+  bottom: 5rem;
+  font-size: 35px;
+}
 .search-jmbg, .search-firstname, .search-lastname{
   margin-right: 1rem;
   height: 1rem;
   border-radius: 5px;
   font-family: 'DynaPuff', cursive;
+  border: none;
+  outline: none;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 15px;
+  color: #adadad;
 }
-
+.search-jmbg::placeholder, .search-firstname::placeholder, .search-lastname::placeholder{
+  color: #adadad;
+}
+.search-jmbg::-webkit-outer-spin-button,
+.search-jmbg::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
 .search-trazi{
   letter-spacing: 2px;
-  text-transform: uppercase;
   font-family: 'DynaPuff', cursive;
   font-weight: 500;
   margin-right: 1rem;
+  background: #2691d9;
+  font-size: 18px;
+  height: 50px;
+  border: 1px solid #2691d9;
+  border-radius: 25px;
+  color: #e9f4fb;
+  cursor: pointer;
+  outline: none;
+  padding: 0 10px;
+}
+.search-trazi:hover{
+  border-color: #2691d9;
+  transition: .5s;
 }
 .dodaj{
   letter-spacing: 2px;
-  text-transform: uppercase;
   font-family: 'DynaPuff', cursive;
   font-weight: 500;
+  background: #2691d9;
+  font-size: 18px;
+  height: 50px;
+  border: 1px solid #2691d9;
+  border-radius: 25px;
+  color: #e9f4fb;
+  cursor: pointer;
+  outline: none;
+  padding: 0 10px;
+}
+.dodaj:hover{
+  border-color: #2691d9;
+  transition: .5s;
 }
 
-
+@media only screen and (max-width: 1200px) {
+  .search-jmbg, .search-firstname, .search-lastname{
+    width: 90%;
+    margin-bottom: 25px;
+  }
+}
