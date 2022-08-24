@@ -1,7 +1,7 @@
 import { useState } from "react"; 
 import './App.css';
 import Modal from './components/Modal.js'
-//import Api from './components/Api.js'
+import Pacijenti from "./components/Pacijenti";
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
           <button className="dodaj" onClick={()=>{setOpenModal(true)} }>Dodaj pacijenta</button> 
                { openModal && <Modal closeModal={setOpenModal} />}
           </div>
-         {/*<Api />*/}
+         <Pacijenti />
       </header>
       
     </div>

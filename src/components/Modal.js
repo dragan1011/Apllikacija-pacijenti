@@ -1,5 +1,5 @@
 import React from "react"
-import './design.css'
+import './Modal.css'
 
 function Modal({closeModal}) {
     return (
@@ -10,9 +10,6 @@ function Modal({closeModal}) {
                 <span className="title">Dodajte novog pacijenta</span>
             <div class="name">
                 <input type="text" required placeholder="Ime" />
-                
-                
-
              </div>
              <div class="name">
                  <input type="text" required placeholder="Prezime" />
