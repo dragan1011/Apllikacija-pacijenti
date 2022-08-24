@@ -1,63 +1,59 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import Gradovi from './Gradovi'
 import './Pacijenti.css'
 
-function Pacijenti() {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+function Component() {
   const [items, setItems] = useState([]);
 
+
+
+  const fetchData = async () => {
+    const response = await fetch("http://81.93.66.18:8234/api.cfc?method=pacijent_trazi&id=2");
+    const data = await response.json();
+    console.log(data);
+    const transformedData = data.lista_pacijenata.DATA.map(item => {
+      return {
+        id: item[0],
+        prezime: item[1],
+        ime: item[2],
+        jmbg: item[3],
+        id_grad: item[4]
+      }
+    });
+    setItems(transformedData);
+  }
+
   useEffect(() => {
-    fetch("http://81.93.66.18:8234/api.cfc?method=pacijent_trazi&id=2")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result.lista_pacijenata);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+    fetchData();
+ 
   }, []);
   
-  const pacijenti = items.DATA;
-
-  if (error) {
-    return <div className="error">Greška: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div className="loading">Učitavanje...</div>;
-  } else {
-    return (
-<table className="tabela">
+  return (
+          <table className="tabela">
 <tr className="heading">
   <th>JMBG</th>
   <th>Ime</th>
   <th>Prezime</th>
   <th>Grad</th>
 </tr>
-        {pacijenti.map(item => (
-          <tr className="lista">
+        {items.map(item => (
+          <tr key={item.id} className="lista">
            <th>
-           {item[3]}
+           {item.jmbg}
             </th>
            <th>
-           {item[2]}
+           {item.ime}
            </th>
            <th>
-           {item[1]}
+           {item.prezime}
            </th>
            <th>
-            <Gradovi />
+            {item.id_grad}
            </th>
           </tr>
         ))}
       </table>
-      
-      );
-  }
+        );
 }
 
-export default Pacijenti;
+export default Component;

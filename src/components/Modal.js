@@ -6,7 +6,7 @@ function Modal({closeModal}) {
 
         <div className="form-container">
             <div className="div-close">
-                <span className="close" onClick={()=>closeModal(false)}>X</span></div>
+                <span className="close" onClick={()=>closeModal(false)}>✖</span></div>
                 <span className="title">Dodajte novog pacijenta</span>
             <div class="name">
                 <input type="text" required placeholder="Ime" />
