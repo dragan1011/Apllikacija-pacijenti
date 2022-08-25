@@ -7,14 +7,65 @@
     width: 100%;
     margin-top: 50px;
     font-size: 20px;
+    justify-content: center;
     
 }
+
 th{
-    padding-top: 25px;
-
-
+    padding: 12.5px 0;
 }
+
  .lista:hover{
-    color: #2691d9;
+    color: #92c7eb;
     cursor: pointer;
+    transition: .5s;
 }
+
+.edit{
+  letter-spacing: 2px;
+  font-family: 'STIX Two Text', serif;
+  margin-right: 1rem;
+  background: #2691d9;
+  height: 40px;
+  border: 1px solid #2691d9;
+  border-radius: 25px;
+  color: #e9f4fb;
+  cursor: pointer;
+  outline: none;
+  font-weight: 700;
+  font-size: 18px;
+}
+.edit:hover{
+    border-color: #2691d9;
+    cursor: pointer;
+    transition: .5s;
+}
+.delete{
+    letter-spacing: 2px;
+    font-family: 'STIX Two Text', serif;
+    margin-right: 1rem;
+    background: #db4646;
+    height: 40px;
+    border: 1px solid #db4646;
+    border-radius: 25px;
+    color: #e9f4fb;
+    cursor: pointer;
+    outline: none;
+    font-weight: 700;
+    font-size: 18px;
+   }
+   .delete:hover{
+    border-color: #2691d9;
+    cursor: pointer;
+   transition: .5s;
+}
+@media only screen and (max-width: 600px) {
+    th{
+      font-size: 12px;
+    }
+    .edit, .delete{
+        height: 30px;
+        font-size: 12px;
+    }
+
+  }

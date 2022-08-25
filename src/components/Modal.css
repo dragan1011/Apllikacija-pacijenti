@@ -56,13 +56,13 @@
 .name input:valid ~ span::before{
   width: 100%;
 }
-div .jmbg::-webkit-outer-spin-button,
-div .jmbg::-webkit-inner-spin-button{
+div .search::-webkit-outer-spin-button,
+.search::-webkit-inner-spin-button{
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type="submit"]{
+.add{
   width: 100%;
   height: 50px;
   border: 1px solid;
@@ -76,7 +76,7 @@ input[type="submit"]{
   letter-spacing: 2px;
   font-weight: bold;
 }
-input[type="submit"]:hover{
+.add:hover{
   border-color: #2691d9;
   transition: .5s;
   

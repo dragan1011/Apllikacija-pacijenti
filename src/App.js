@@ -20,6 +20,10 @@ function App() {
     ev.preventDefault();
     if (inputName.trim().length >= 3) {
       isSearching(true)
+    }else if(inputJMBG.trim().length >= 3){
+      isSearching(true)
+    }else{
+      return <div>Parametri za pretragu nisu dobro unešeni</div>
     }
   }
 
@@ -29,14 +33,14 @@ function App() {
       <div className="search-container">
         <div className="patients">Evidencija pacijenata</div>
         <form onSubmit={searchHandler}>
-        <input onChange={inputNameHandler} className="search" placeholder="JMBG..." />
-        <input onChange={inputJMBGHandler} className="search" placeholder="Ime ili prezime..." />
+        <input type="number" onChange={inputNameHandler} className="search" placeholder="JMBG..." />
+        <input type="text" onChange={inputJMBGHandler} className="search" placeholder="Ime ili prezime..." />
           <button className="search-trazi" >Traži</button>
           <button className="dodaj" onClick={()=>{setOpenModal(true)} }>Dodaj pacijenta</button> 
           </form>
                { openModal && <Modal closeModal={setOpenModal} />}
           </div>
-         <Pacijenti searchTerm={inputName} />
+         { <Pacijenti searchTerm={inputName} />}
       </header>
       
     </div>
