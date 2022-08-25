@@ -41,7 +41,7 @@ function App() {
                { openModal && <Modal closeModal={setOpenModal} />}
           </div>
          { <Pacijenti searchTerm={inputName} />}
-      </header>
+               </header>
       
     </div>
   );

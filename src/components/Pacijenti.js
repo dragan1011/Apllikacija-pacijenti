@@ -3,7 +3,7 @@ import React from "react";
 import './Pacijenti.css'
 import Edit from "./Edit";
 
-function Component() {
+function Pacijenti() {
   const [items, setItems] = useState([]);
 
   const [openModal, setOpenModal] = useState(false);
@@ -47,6 +47,11 @@ function Component() {
  
   }, []);
   
+  function selectUser(){
+    return <div>Radi</div>
+  }
+
+
   return (
           <table className="tabela">
 
@@ -70,10 +75,10 @@ function Component() {
            <th>
             {item.id_grad}
            </th>
-           <th>
-           <input type="submit" className="edit" value="Izmijeni" onClick={()=>{setOpenModal(true)}}  />
-          
-           </th>
+           <th >
+           <input type="submit" className="edit" value="Izmijeni" onClick={()=>{setOpenModal(true)}}   />
+          { openModal && <Edit closeModal={setOpenModal} />}
+                     </th>
            <th>
            <input type="submit" className="delete" value="Izbriši" />
            </th>
@@ -81,7 +86,7 @@ function Component() {
         ))}
       </table>
         );
-        <Edit />
+
 }
 
-export default Component;
+export default Pacijenti;
