@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 .loading, .error{
     margin-top: 50px;
@@ -8,7 +8,6 @@
     margin-top: 50px;
     font-size: 20px;
     justify-content: center;
-    
 }
 
 th{
@@ -23,7 +22,7 @@ th{
 
 .edit{
   letter-spacing: 2px;
-  font-family: 'STIX Two Text', serif;
+  font-family: 'Roboto', sans-serif;
   margin-right: 1rem;
   background: #2691d9;
   height: 40px;
@@ -42,7 +41,7 @@ th{
 }
 .delete{
     letter-spacing: 2px;
-    font-family: 'STIX Two Text', serif;
+    font-family: 'Roboto', sans-serif;
     margin-right: 1rem;
     background: #db4646;
     height: 40px;

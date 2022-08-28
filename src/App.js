@@ -1,46 +1,43 @@
+import axios from "axios";
 import { useState } from "react"; 
 import './App.css';
 import Modal from './components/Modal.js'
 import Pacijenti from "./components/Pacijenti";
 
 function App() {
-  const [inputName, setInputName] = useState("");
-  const [inputJMBG, setInputJMBG] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
 
-  const [openModal, setOpenModal] = useState(false)
+const [openModal, setOpenModal] = useState(false)
 
-  function inputNameHandler(ev) {
-    setInputName(ev.target.value)
-  }
-  function inputJMBGHandler(ev) {
-    setInputJMBG(ev.target.value)
-  }
-  function searchHandler(ev){
-    ev.preventDefault();
-    if (inputName.trim().length >= 3) {
-      isSearching(true)
-    }else if(inputJMBG.trim().length >= 3){
-      isSearching(true)
-    }else{
-      return <div>Parametri za pretragu nisu dobro unešeni</div>
-    }
-  }
+const [data, setData] = useState([]);
+const [value, setValue] = useState([])
+
+const handleSearch = async (e) =>{
+  e.preventDefault();
+  return await axios
+  .get(`http://81.93.66.18:8234/api2.cfc?method=pacijent_trazi&ime=${value}`)
+  .then((response)=> {
+    setData(response.data);
+    setValue("");
+  })
+  .catch((err) => console.log(err))
+}
+
+
 
   return (
     <div className="App">
       <header className="App-header">
       <div className="search-container">
         <div className="patients">Evidencija pacijenata</div>
-        <form onSubmit={searchHandler}>
-        <input type="number" onChange={inputNameHandler} className="search" placeholder="JMBG..." />
-        <input type="text" onChange={inputJMBGHandler} className="search" placeholder="Ime ili prezime..." />
-          <button className="search-trazi" >Traži</button>
+        <form onSubmit={handleSearch}>
+        <input type="number" className="search" placeholder="JMBG..." />
+        <input type="text" onChange={(e) => setValue(e.target.value)} className="search" placeholder="Ime ili prezime..." />
+          <button type="submit" className="search-trazi" >Traži</button>
           <button className="dodaj" onClick={()=>{setOpenModal(true)} }>Dodaj pacijenta</button> 
           </form>
                { openModal && <Modal closeModal={setOpenModal} />}
           </div>
-         { <Pacijenti searchTerm={inputName} />}
+         { <Pacijenti/>}
                </header>
       
     </div>

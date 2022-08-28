@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 
 .form-container{
@@ -44,7 +44,7 @@
   border: none;
   background: none;
   outline: none;
-  font-family: 'STIX Two Text', serif;
+  font-family: 'Roboto', sans-serif;
   color: #adadad;
   font-weight: bold;
 }
@@ -61,6 +61,11 @@ div .search::-webkit-outer-spin-button,
   -webkit-appearance: none;
   margin: 0;
 }
+.editJmbg::-webkit-outer-spin-button,
+.editJmbg::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .add{
   width: 100%;
@@ -72,7 +77,7 @@ div .search::-webkit-outer-spin-button,
   color: #e9f4fb;
   cursor: pointer;
   outline: none;
-  font-family: 'STIX Two Text', serif;
+  font-family: 'Roboto', sans-serif;
   letter-spacing: 2px;
   font-weight: bold;
 }
@@ -92,7 +97,7 @@ div .search::-webkit-outer-spin-button,
   color: #e9f4fb;
   cursor: pointer;
   outline: none;
-  font-family: 'STIX Two Text', serif;
+  font-family: 'Roboto', sans-serif;
   margin-top: 20px;
   letter-spacing: 2px;
   font-weight: bold;
@@ -100,4 +105,18 @@ div .search::-webkit-outer-spin-button,
 .exit:hover{
   border-color: #db4646;
   transition: .5s;
+}
+
+.options{
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  color: #adadad;
+  font-weight: bold;
+  border: none;
 }

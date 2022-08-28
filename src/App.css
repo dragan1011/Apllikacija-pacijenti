@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 .App {
   text-align: center;
 }
@@ -10,7 +9,8 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  font-family: 'STIX Two Text', serif;
+  font-family: 'Roboto', sans-serif;
+
   padding-top: 10rem;
 }
 .patients{
@@ -23,7 +23,7 @@
   margin-right: 1rem;
   height: 1rem;
   border-radius: 5px;
-  font-family: 'STIX Two Text', serif;
+  font-family: 'Roboto', sans-serif;
   border: none;
   outline: none;
   padding: 0 5px;
@@ -44,7 +44,7 @@
 }
 .search-trazi{
   letter-spacing: 2px;
-  font-family: 'STIX Two Text', serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   margin-right: 1rem;
   background: #2691d9;
@@ -64,7 +64,7 @@
 }
 .dodaj{
   letter-spacing: 2px;
-  font-family: 'STIX Two Text', serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   background: #2691d9;
   font-size: 18px;
