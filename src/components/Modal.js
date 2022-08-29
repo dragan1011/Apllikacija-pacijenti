@@ -1,49 +1,62 @@
-import React from "react"
+import axios from "axios";
+import React, { useRef } from "react"
 import { useState } from "react";
 import './Modal.css'
 
 function Modal({closeModal}) {
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [JMBG, setJMBG] = useState("");
+    const imeRef = useRef();
+    const prezimeRef = useRef();
+    const jmbgRef = useRef();
+   
+    const [data, setData] = useState({
+        firstName:"",
+        lastName:"",
+        jmbg:""
+    })
+
+   
+    function submit(e) {
+        e.preventDefault();
+        const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=2`;
+        
     
-   async function addPatient() {
-        console.warn(firstName,lastName,JMBG)
-
-       const formData = new FormData();
-       formData.append('firstName', firstName)
-       formData.append('lastName', lastName)
-       formData.append('JMBG', JMBG)
-
-       JSON.stringify(formData)
-
-       let result = await fetch('http://81.93.66.18:8234/api.cfc?method=pacijent_unos',{
-           method:'POST',
-           body:formData
-       });
-       alert('Dodali ste novog pacijenta!')
-       console.log(typeof result)
+        axios.post(url, {
+            firstName: imeRef.current.value,
+            lastName: prezimeRef.current.value,
+            jmbg: jmbgRef.current.value
+        })
+        .then(res=> {
+            console.log(res.data)
+        })
     }
 
+   function handle(e){
+    const newdata={...data}
+    newdata[e.target.id] = e.target.value
+    setData(newdata)
+    console.log(newdata)
+   }
+    
     return (
         <div className="form-container">
+            <form onSubmit={(e)=> submit(e)}>
             <div className="div-close">
                 <span className="close" onClick={()=>closeModal(false)}>✖</span></div>
                 <span className="title">Dodajte novog pacijenta</span>
             <div className="name">
-                <input type="text" required placeholder="Ime" onChange={(e)=>setFirstName(e.target.value)} />
+                <input type="text" id="firstName" onChange={(e)=>handle(e)} ref={imeRef} required placeholder="Ime" />
              </div>
              <div className="name">
-                 <input type="text" required placeholder="Prezime" onChange={(e)=>setLastName(e.target.value)} />
+                 <input type="text" id="lastName" onChange={(e)=>handle(e)} ref={prezimeRef} required placeholder="Prezime" />
                   
              </div>
              <div className="name jmbg">
-                 <input type="number" required placeholder="JMBG" onChange={(e)=>setJMBG(e.target.value)}/>
+                 <input type="number" id="jmbg" onChange={(e)=>handle(e)} ref={jmbgRef} required placeholder="JMBG"/>
              </div>
-             <input type="submit" className="add" onClick={addPatient} value="Dodaj" />
+             <input type="submit" className="add"  value="Dodaj" />
              <input type="button" onClick={()=>closeModal(false)} className="exit" value="Odustani" />
-           
+             </form>
         </div>
 
     );
