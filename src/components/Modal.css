@@ -120,3 +120,13 @@ div .search::-webkit-outer-spin-button,
   font-weight: bold;
   border: none;
 }
+.nameJMBG::-webkit-outer-spin-button,
+.nameJMBG::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+#jmbg::-webkit-outer-spin-button,
+#jmbg::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}

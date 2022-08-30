@@ -8,7 +8,7 @@ function Modal({closeModal}) {
     const imeRef = useRef();
     const prezimeRef = useRef();
     const jmbgRef = useRef();
-   
+
     const [data, setData] = useState({
         firstName:"",
         lastName:"",
@@ -20,14 +20,16 @@ function Modal({closeModal}) {
         e.preventDefault();
         const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=2`;
         
-    
         axios.post(url, {
             firstName: imeRef.current.value,
             lastName: prezimeRef.current.value,
             jmbg: jmbgRef.current.value
         })
         .then(res=> {
-            console.log(res.data)
+            console.log(res.data);
+            imeRef.current.value = "";
+            prezimeRef.current.value = "";
+            jmbgRef.current.value = "";
         })
     }
 
@@ -37,7 +39,9 @@ function Modal({closeModal}) {
     setData(newdata)
     console.log(newdata)
    }
+
     
+
     return (
         <div className="form-container">
             <form onSubmit={(e)=> submit(e)}>
