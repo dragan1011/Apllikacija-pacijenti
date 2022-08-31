@@ -10,7 +10,6 @@ function App() {
 const [items, setItems] = useState([]);
 const [isSearching, setIsSearching] =useState(false);
 
-
 const [openModal, setOpenModal] = useState(false)
 
 const [data, setData] = useState([]);
@@ -22,6 +21,7 @@ const fetchGradovi = async () => {
   const data = await response.json();
 
   const transformedData = data.gradovi.DATA.map(item => {
+    
     return {
       id_grad: item[0],
       naziv: item[1]
@@ -30,20 +30,20 @@ const fetchGradovi = async () => {
   setItems(transformedData);
 }
 
-
 useEffect(() => {
  fetchGradovi();
 }, []);
 
 const handleNameSearch = async (e) =>{
+
   e.preventDefault();
+
   if (nameValue.trim() ==  '' || nameValue.trim() == null) {
     return alert('Morate unijeti karaktere za pretragu!');
   }
   if (nameValue.trim().length >= 1 && nameValue.trim().length <= 3) {
     return alert('Morate unijeti više od tri karaktera za pretragu!')
   }
-  
   
   return await axios
   .get(`http://81.93.66.18:8234/api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
@@ -68,7 +68,7 @@ const handleNameSearch = async (e) =>{
   }
 
  
-
+console.log()
 
 const handleJMBGSearch = async (e) =>{
   e.preventDefault();
@@ -83,7 +83,6 @@ const handleJMBGSearch = async (e) =>{
   .catch((err) => console.log(err))
 }
 
-
   return (
     <div className="App">
       <header className="App-header">
@@ -95,7 +94,7 @@ const handleJMBGSearch = async (e) =>{
           <button type="submit" className="search-trazi" >Traži</button>
           <button className="dodaj" type="button" onClick={()=>{setOpenModal(true)} }>Dodaj pacijenta</button> 
           </form>
-               { openModal && <Modal gradovi={data} mbroj={data} closeModal={setOpenModal} />}
+               { openModal && <Modal gradovi={items} mbroj={data} closeModal={setOpenModal} />}
           </div>
           {isSearching && <Pacijenti pacijenti={data}/>}
                </header>

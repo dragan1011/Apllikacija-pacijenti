@@ -2,7 +2,7 @@ import React from "react";
 import './Pacijenti.css'
 import axios from "axios";
 
-function Pacijenti(props) {
+function Edit(props) {
 
   function deletePatient(id, e) {
     e.preventDefault();
@@ -11,7 +11,6 @@ function Pacijenti(props) {
     .then(res=> {
         console.log(res.data);
        alert('Pacijent je obrisan!')
-       console.log(props.pacijenti)
     })
 }
 
@@ -55,4 +54,4 @@ function Pacijenti(props) {
 
 }
 
-export default Pacijenti;
+export default Edit;

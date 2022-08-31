@@ -4,9 +4,9 @@ import { useState } from "react";
 import './Modal.css'
 import Gradovi from './Gradovi'
 
-function Modal({closeModal}, props) {
+function Modal(props) {
 
-    console.log(props.gradovi)
+    console.log(props.gradovi);
     const [openModal, setOpenModal] = useState(false);
 
     const imeRef = useRef();
@@ -16,11 +16,11 @@ function Modal({closeModal}, props) {
     const [data, setData] = useState({
         firstName:"",
         lastName:"",
-        jmbg:""
+        jmbg:"",
+        grad:''
     })
 
-   
-    function submit(e,item) {
+    function submit(e) {
         e.preventDefault();
 
         if (imeRef.current.value.trim() === '' || imeRef.current.value.trim() === null) {
@@ -41,6 +41,7 @@ function Modal({closeModal}, props) {
         if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
             return alert ('Morate unijeti tačno 13 karaktera!')
         }
+
         const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=2`;
         
         axios.post(url, {
@@ -58,19 +59,18 @@ function Modal({closeModal}, props) {
     }
 
    function handle(e){
-    const newdata={...data}
-    newdata[e.target.id] = e.target.value
-    setData(newdata)
+    const index = e.target.children[e.target.selectedIndex].dataset.id;
+    const newdata={...data, grad: index}
     console.log(newdata)
+    setData(newdata)
    }
 
-    
-
+   
     return (
         <div className="form-container">
             <form onSubmit={(e)=> submit(e)}>
             <div className="div-close">
-                <span className="close" onClick={()=>closeModal(false)}>✖</span></div>
+                <span className="close" onClick={()=>props.closeModal(false)}>✖</span></div>
                 <span className="title">Dodajte novog pacijenta</span>
             <div className="name">
                 <input type="text" id="firstName" onChange={(e)=>handle(e)} ref={imeRef} placeholder="Ime" />
@@ -82,14 +82,18 @@ function Modal({closeModal}, props) {
              <div className="name jmbg">
                  <input type="number" id="jmbg" onChange={(e)=>handle(e)} ref={jmbgRef} placeholder="JMBG"/>
              </div>
-             <div className="grad">
-             <select  className="lista">
-                   </select>
+             <div className="grad">             
+                  <select onChange={handle}>
+                    {props.gradovi.map(item => (
+                      <option data-id={item.id_grad} className="lista"> 
+                        { item.naziv }   
+                        </option> 
+                     ))}
+                </select>
                 <input type="button" onClick={() => {setOpenModal(true)}} className="add dodaj"  value="Dodaj novi grad" />
-               
              </div>
              <input type="submit" className="add"  value="Dodaj" />
-             <input type="button" onClick={()=>closeModal(false)} className="exit" value="Odustani" />
+             <input type="button" onClick={()=>props.closeModal(false)} className="exit" value="Odustani" />
              </form>
              { openModal && <Gradovi closeModal={setOpenModal} />}
         </div>
