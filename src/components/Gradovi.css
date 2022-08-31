@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.form-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 10px 11px 22px 3px rgba(0,0,0,0.65);
+  -webkit-box-shadow: 10px 11px 22px 3px rgba(0,0,0,0.65);
+  -moz-box-shadow: 10px 11px 22px 3px rgba(0,0,0,0.65);
+    padding: 50px 50px;
+  }
+  
+  .div-close{
+    position: relative;
+    left: 12.5rem;
+    bottom: 2rem;
+  }
+  .close{
+   color: #adadad;
+   position: absolute;
+   text-align: right;
+   cursor: pointer;
+  }
+  .title{
+    color: #adadad;
+    font-weight: bold;
+  }
+  .cityName{
+    position: relative;
+    border: 2px solid #adadad;
+    border-radius: 15px;
+    margin: 30px 0;
+  }
+  .cityName-input{
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    color: #adadad;
+    font-weight: bold;
+  }

@@ -1,6 +1,10 @@
 import React from "react";
 import './Modal.css'
 
+
+
+
+
 function Edit({closeModal}, {data}) {
     return (
     <div className="form-container">

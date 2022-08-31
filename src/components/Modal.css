@@ -130,3 +130,31 @@ div .search::-webkit-outer-spin-button,
   -webkit-appearance: none;
   margin: 0;
 }
+.grad{
+display: flex;
+margin: 0 0 25px 0;
+}
+
+.gradovi{
+  font-size: 25px;
+  border: none;
+  background: none;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  color: #adadad;
+  font-weight: bold
+}
+
+.listaGradova{
+  font-size: 25px;
+  border: none;
+  background: none;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  color: #adadad;
+  font-weight: bold
+}
+.dodaj{
+  margin-left: 30px;
+
+}

@@ -35,7 +35,7 @@ th{
   font-size: 18px;
 }
 .edit:hover{
-    border-color: #2691d9;
+    border-color: #adadad;
     cursor: pointer;
     transition: .5s;
 }
@@ -54,9 +54,9 @@ th{
     font-size: 18px;
    }
    .delete:hover{
-    border-color: #2691d9;
+    border-color: #adadad;
     cursor: pointer;
-   transition: .5s;
+    transition: .5s;
 }
 @media only screen and (max-width: 600px) {
     th{

@@ -1,46 +1,62 @@
-import { useState, useEffect } from "react";
-import React from "react";
 
-function Pacijenti() {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+import React from "react"
+import './Gradovi.css'
+import axios from "axios";
+import { useState, useRef } from "react";
 
-  useEffect(() => {
-    fetch("http://81.93.66.18:8234/api.cfc?method=gradovi_lista")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result.gradovi);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  }, []);
+function Gradovi({closeModal}) {
+
   
-  const gradovi = items.DATA;
+  const gradRef = useRef();
 
-  if (error) {
-    return <div>Greška: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Učitavanje...</div>;
-  } else {
-    return (
-<table className="tabela">
-        {gradovi.map(item => (
-          <tr className="lista">
-           <th>
-           {item[1]}
-            </th>
-          </tr>
-        ))}
-      </table>
-      
-      );
-  }
+  const [data, setData] = useState({
+      grad:""
+  })
+  function submit(e) {
+    e.preventDefault();
+
+    console.log(gradRef.current.value);
+    if (gradRef.current.value.trim() === '' || gradRef.current.value.trim() === null) {
+        return alert('Morate nazziv grada! ')
+    }
+    if (gradRef.current.value.trim().length <= 2) {
+        return alert ('Morate unijeti više od dva karaktera!')
+    }
+  
+    const url = `http://81.93.66.18:8234/api.cfc?method=gradovi_unos&naziv=${gradRef.current.value}`;
+    
+    axios.post(url, {
+      grad: gradRef.current.value,
+    })
+    .then(res=> {
+        console.log(res.data);
+        closeModal(false)
+        alert('Dodali ste novi grad!');
+    })
 }
 
-export default Pacijenti;
+  function handle(e){
+    const newdata={...data}
+    newdata[e.target.id] = e.target.value
+    setData(newdata)
+    console.log(newdata)
+   }
+
+    return (
+        <div className="form-container">
+            <form  onSubmit={(e)=> submit(e)}>
+            <div className="div-close">
+                <span className="close" onClick={()=>closeModal(false)} >✖</span></div>
+                <span className="title">Dodajte naziv grada</span>
+            <div className="cityName">
+                <input type="text" id="grad" className="cityName-input" onChange={(e)=>handle(e)} ref={gradRef}  placeholder="Naziv grada" />
+             </div>
+             <input type="submit" className="add"  value="Dodaj" />
+             <input type="button" onClick={()=>closeModal(false)} className="exit" value="Odustani" />
+             </form>
+        </div>
+
+    );
+}
+
+export default Gradovi;
