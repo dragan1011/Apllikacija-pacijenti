@@ -46,7 +46,6 @@
   letter-spacing: 2px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  margin-right: 1rem;
   background: #2691d9;
   font-size: 18px;
   height: 50px;
@@ -82,9 +81,16 @@
   transition: .5s;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 900px) {
   .search{
     width: 90%;
+    margin-bottom: 25px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .search{
+    width: 100%;
     margin-bottom: 25px;
   }
 }
