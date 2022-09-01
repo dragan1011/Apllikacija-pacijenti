@@ -1,18 +1,18 @@
 import React from "react";
 import './Pacijenti.css';
+import { useRef } from "react";
+import axios from "axios";
 
 function Edit(props) {
-console.log(props.podaci)
 
 
-const imeRef = useRef();
+    const imeRef = useRef();
     const prezimeRef = useRef();
     const jmbgRef = useRef();
 
 
-function submit(e) {
-    e.preventDefault();
-
+ function submit(e) {
+     e.preventDefault();
     if (imeRef.current.value.trim() === '' || imeRef.current.value.trim() === null) {
         return alert('Morate unijeti ime pacijenta! ')
     }
@@ -31,46 +31,43 @@ function submit(e) {
     if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
         return alert ('Morate unijeti tačno 13 karaktera!')
     }
-            const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
+
+    console.log(imeRef.current.value);
+    console.log(prezimeRef.current.value);
+    console.log(jmbgRef.current.value);
+            const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=2&id=${props.podaci.id}`;
 
     axios.post(url, {
         ime: imeRef.current.value,
         prezime: prezimeRef.current.value,
         jmbg: jmbgRef.current.value,
-        id_grad: +data.grad
     })
-    .then(res=> {
-        console.log(res.data);
-        imeRef.current.value = "";
-        prezimeRef.current.value = "";
-        jmbgRef.current.value = "";
-        
-        alert('Dodali ste novog pacijenta!');
-    })
+    .then(res=> {      
+        alert('Uspješno ste napravili izmjene!');
+    })  
 }
 
 return (
+
 <div className="form-container">
-<form>
+<form onSubmit={(e) => submit(e)}>
 <div className="div-close">
-    <span className="close" >✖</span></div>
+    <span className="close"  onClick={() => props.closeModal(false)}  >✖</span></div>
     <span className="title">Izmjena podataka pacijenta</span>
 <div className="name">
-    <input type="text"  id="firstName" defaultValue={props.podaci.ime}  />
-    <></>
+    <input type="text" id="firstName" ref={imeRef} defaultValue={props.podaci.ime}  />
  </div>
  <div className="name">
-     <input type="text" id="lastName"  defaultValue={props.podaci.prezime}  />
+     <input type="text" id="lastName"  ref={prezimeRef} defaultValue={props.podaci.prezime}  />
       
  </div>
  <div className="name jmbg">
-     <input type="number" id="jmbg" defaultValue={props.podaci.jmbg}  />
+     <input type="number" id="jmbg" ref={jmbgRef} defaultValue={props.podaci.jmbg}  />
  </div>
  <div className="name jmbg">
-    <input defaultValue={props.podaci.grad} />
  </div>
- <input type="button" className="add"  value="Sacuvaj" />
- <input type="button" className="exit" value="Odustani" />
+ <input type="submit" className="add"  value="Sacuvaj" />
+ <input type="button" className="exit" onClick={() => props.closeModal(false)}  value="Odustani" />
  </form>
 </div>
 )

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import './App.css';
 import Modal from './components/Modal.js'
 import Pacijenti from "./components/Pacijenti";
+import Edit from './components/Edit'
 
 function App() {
 
@@ -17,7 +18,7 @@ const [nameValue, setNameValue] = useState('')
 const [jmbgValue, setJMBGValue] = useState('')
 
 const fetchGradovi = async () => {
-  const response = await fetch("http://172.18.1.73:8080/api.cfc?method=gradovi_lista");
+  const response = await fetch("http://81.93.66.18:8234//api.cfc?method=gradovi_lista");
   const data = await response.json();
 
   const transformedData = data.gradovi.DATA.map(item => {
@@ -47,7 +48,7 @@ const handleNameSearch = async (e) =>{
   }
   
   return await axios
-  .get(`http://172.18.1.73:8080/api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
+  .get(`http://81.93.66.18:8234//api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
   .then((response)=> {
     console.log(response.data.lista_pacijenata.DATA);
     const transformedData = response.data.lista_pacijenata.DATA.map(item => {
@@ -72,17 +73,49 @@ const handleNameSearch = async (e) =>{
 
 const handleJMBGSearch = async (e) =>{
   e.preventDefault();
+
+  if (jmbgValue.trim() ==  '' || jmbgValue.trim() == null) {
+    return alert('Morate unijeti karaktere za pretragu!');
+  }
+  if (jmbgValue.trim().length >= 1 && jmbgValue.trim().length <= 3) {
+    return alert('Morate unijeti više od tri karaktera za pretragu!')
+  }
+  
   return await axios
-  .get(`http://172.18.1.73:8080/api2.cfc?method=pacijent_trazi&jmbg=${jmbgValue}`)
+  .get(`http://81.93.66.18:8234//api2.cfc?method=pacijent_trazi&jmbg=${jmbgValue}`)
   .then((response)=> {
     console.log(response.data.lista_pacijenata.DATA);
-    setData(response.data.lista_pacijenata.DATA);
+    const transformedData = response.data.lista_pacijenata.DATA.map(item => {
+      let pomocnaVarijabla = '';
+      pomocnaVarijabla = items.findIndex(grad => {return grad.id_grad === item[4]});
+      return {
+        id: item[0],
+        prezime: item[1],
+        ime: item[2],
+        jmbg: item[3],
+        grad: pomocnaVarijabla !== -1 ? items[pomocnaVarijabla].naziv : ""
+      }
+    });
+    setData(transformedData);
     setJMBGValue("");
     setIsSearching(true);
   })
   .catch((err) => console.log(err))
 }
 
+
+
+console.log(nameValue.length)
+
+/* 
+ function search(e) {
+ if (nameValue.length > 0) {
+  handleNameSearch();
+ }else{
+  handleJMBGSearch();
+ }
+}  
+ */
   return (
     <div className="App">
       <header className="App-header">

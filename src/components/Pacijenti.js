@@ -5,12 +5,14 @@ import Edit from './Edit.js'
 
 function Pacijenti(props) {
   const [formData,setFormData] = useState([]);
-  const [isEditing,setIsEditing] = useState(false);
+  const [openModal,setOpenModal] = useState(false);
+
 
   function deletePatient(id, e) {
     e.preventDefault();
+    e.target.parentElement.parentElement.remove();
     console.log(id)
-    axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${id}`)
+    axios.post(`http://81.93.66.18:8234/api2.cfc?method=pacijent_obrisi&id=${id}`)
     .then(res=> {
         console.log(res.data);
        alert('Pacijent je obrisan!')
@@ -27,12 +29,11 @@ function editPatient(id,ime, prezime,jmbg, grad) {
     grad: grad
   }
   setFormData(data);
-  setIsEditing(true);
+  setOpenModal(true);
 }
 
 
   return (
-    <>
     <table className="tabela">
 
 <tr className="heading">
@@ -48,7 +49,7 @@ function editPatient(id,ime, prezime,jmbg, grad) {
            {item.jmbg}
            </th>
            <th>
-           {item.ime }
+           {item.ime.charAt(0).toUpperCase() + item.ime.slice(1).toLowerCase() }
            </th>
            <th>
            {item.prezime.charAt(0).toUpperCase() + item.prezime.slice(1).toLowerCase()}
@@ -64,10 +65,9 @@ function editPatient(id,ime, prezime,jmbg, grad) {
            </th>
           </tr>
         ))}
-        {isEditing && <Edit podaci={formData}></Edit>}
+        {openModal && <Edit closeModal={setOpenModal} podaci={formData}></Edit>}
       </table>
-    
-    </>
+  
           
         );
 
