@@ -3,10 +3,8 @@ import { useEffect, useState } from "react";
 import './App.css';
 import Modal from './components/Modal.js'
 import Pacijenti from "./components/Pacijenti";
-import Edit from './components/Edit'
 
 function App() {
-
 
 const [items, setItems] = useState([]);
 const [isSearching, setIsSearching] =useState(false);
@@ -36,18 +34,20 @@ useEffect(() => {
 }, []);
 
 
-const handleNameSearch = async (e) =>{
-
+ function search(e) {
+e.preventDefault();
+if (nameValue.length >= 1 ) {
+ 
   e.preventDefault();
 
-  if (nameValue.trim() ==  '' || nameValue.trim() == null) {
+  if (nameValue.trim() ===  '' || nameValue.trim() === null) {
     return alert('Morate unijeti karaktere za pretragu!');
   }
   if (nameValue.trim().length >= 1 && nameValue.trim().length <= 3) {
     return alert('Morate unijeti više od tri karaktera za pretragu!')
   }
   
-  return await axios
+  return axios
   .get(`http://81.93.66.18:8234//api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
   .then((response)=> {
     console.log(response.data.lista_pacijenata.DATA);
@@ -63,25 +63,20 @@ const handleNameSearch = async (e) =>{
       }
     });
     setData(transformedData);
-    setNameValue("");
     setIsSearching(true);
   })
   .catch((err) => console.log(err))
-  }
-
- 
-
-const handleJMBGSearch = async (e) =>{
+}else{
   e.preventDefault();
 
-  if (jmbgValue.trim() ==  '' || jmbgValue.trim() == null) {
+  if (jmbgValue.trim() ===  '' || jmbgValue.trim() === null) {
     return alert('Morate unijeti karaktere za pretragu!');
   }
   if (jmbgValue.trim().length >= 1 && jmbgValue.trim().length <= 3) {
     return alert('Morate unijeti više od tri karaktera za pretragu!')
   }
   
-  return await axios
+  return axios
   .get(`http://81.93.66.18:8234//api2.cfc?method=pacijent_trazi&jmbg=${jmbgValue}`)
   .then((response)=> {
     console.log(response.data.lista_pacijenata.DATA);
@@ -97,31 +92,18 @@ const handleJMBGSearch = async (e) =>{
       }
     });
     setData(transformedData);
-    setJMBGValue("");
     setIsSearching(true);
   })
   .catch((err) => console.log(err))
 }
-
-
-
-console.log(nameValue.length)
-
-/* 
- function search(e) {
- if (nameValue.length > 0) {
-  handleNameSearch();
- }else{
-  handleJMBGSearch();
- }
 }  
- */
   return (
+    
     <div className="App">
       <header className="App-header">
       <div className="search-container">
         <div className="patients">Evidencija pacijenata</div>
-        <form onSubmit={handleNameSearch}>
+        <form onSubmit={search}>
         <input  type="number" onChange={(e) => setJMBGValue(e.target.value)} className="search" placeholder="JMBG..." />
         <input value={nameValue} type="text" onChange={(e) => setNameValue(e.target.value)} className="search" placeholder="Ime ili prezime..." />
           <button type="submit" className="search-trazi" >Traži</button>
@@ -131,8 +113,10 @@ console.log(nameValue.length)
           </div>
           {isSearching && <Pacijenti pacijenti={data}/>}
                </header>
-      
+               
     </div>
+
+ 
   );
 }
 
