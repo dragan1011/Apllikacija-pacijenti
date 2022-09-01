@@ -13,9 +13,10 @@ function Modal(props) {
     const prezimeRef = useRef();
     const jmbgRef = useRef();
 
+
     const [data, setData] = useState({
-        firstName:"",
-        lastName:"",
+        ime:"",
+        prezime:"",
         jmbg:"",
         grad:''
     })
@@ -41,19 +42,20 @@ function Modal(props) {
         if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
             return alert ('Morate unijeti tačno 13 karaktera!')
         }
+                const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
 
-        const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=2`;
-        
         axios.post(url, {
-            firstName: imeRef.current.value,
-            lastName: prezimeRef.current.value,
-            jmbg: jmbgRef.current.value
+            ime: imeRef.current.value,
+            prezime: prezimeRef.current.value,
+            jmbg: jmbgRef.current.value,
+            id_grad: +data.grad
         })
         .then(res=> {
             console.log(res.data);
             imeRef.current.value = "";
             prezimeRef.current.value = "";
             jmbgRef.current.value = "";
+            
             alert('Dodali ste novog pacijenta!');
         })
     }
@@ -73,19 +75,19 @@ function Modal(props) {
                 <span className="close" onClick={()=>props.closeModal(false)}>✖</span></div>
                 <span className="title">Dodajte novog pacijenta</span>
             <div className="name">
-                <input type="text" id="firstName" onChange={(e)=>handle(e)} ref={imeRef} placeholder="Ime" />
+                <input type="text" id="firstName" ref={imeRef} placeholder="Ime" />
              </div>
              <div className="name">
-                 <input type="text" id="lastName" onChange={(e)=>handle(e)} ref={prezimeRef} placeholder="Prezime" />
+                 <input type="text" id="lastName" ref={prezimeRef} placeholder="Prezime" />
                   
              </div>
              <div className="name jmbg">
-                 <input type="number" id="jmbg" onChange={(e)=>handle(e)} ref={jmbgRef} placeholder="JMBG"/>
+                 <input type="number" id="jmbg" ref={jmbgRef} placeholder="JMBG"/>
              </div>
              <div className="grad">             
-                  <select onChange={handle}>
+                  <select className="gradovi" onChange={handle}>
                     {props.gradovi.map(item => (
-                      <option data-id={item.id_grad} className="lista"> 
+                      <option className="listaGradova" data-id={item.id_grad} > 
                         { item.naziv }   
                         </option> 
                      ))}

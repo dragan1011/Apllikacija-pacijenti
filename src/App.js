@@ -17,7 +17,7 @@ const [nameValue, setNameValue] = useState('')
 const [jmbgValue, setJMBGValue] = useState('')
 
 const fetchGradovi = async () => {
-  const response = await fetch("http://81.93.66.18:8234/api.cfc?method=gradovi_lista");
+  const response = await fetch("http://172.18.1.73:8080/api.cfc?method=gradovi_lista");
   const data = await response.json();
 
   const transformedData = data.gradovi.DATA.map(item => {
@@ -34,6 +34,7 @@ useEffect(() => {
  fetchGradovi();
 }, []);
 
+
 const handleNameSearch = async (e) =>{
 
   e.preventDefault();
@@ -46,7 +47,7 @@ const handleNameSearch = async (e) =>{
   }
   
   return await axios
-  .get(`http://81.93.66.18:8234/api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
+  .get(`http://172.18.1.73:8080/api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
   .then((response)=> {
     console.log(response.data.lista_pacijenata.DATA);
     const transformedData = response.data.lista_pacijenata.DATA.map(item => {
@@ -68,12 +69,11 @@ const handleNameSearch = async (e) =>{
   }
 
  
-console.log()
 
 const handleJMBGSearch = async (e) =>{
   e.preventDefault();
   return await axios
-  .get(`http://81.93.66.18: 8234/api2.cfc?method=pacijent_trazi&jmbg=${jmbgValue}`)
+  .get(`http://172.18.1.73:8080/api2.cfc?method=pacijent_trazi&jmbg=${jmbgValue}`)
   .then((response)=> {
     console.log(response.data.lista_pacijenata.DATA);
     setData(response.data.lista_pacijenata.DATA);
