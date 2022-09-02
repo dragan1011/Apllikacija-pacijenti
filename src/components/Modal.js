@@ -42,7 +42,36 @@ function Modal(props) {
         if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
             return alert ('Morate unijeti tačno 13 karaktera!')
         }
-                const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
+       if (jmbgRef.current.value.trim().length === 13 ) {
+            const jmbg = jmbgRef.current.value.trim();
+            const a1 = jmbg[0];
+            const a2 = jmbg[1];
+            const a3 = jmbg[2];
+            const a4 = jmbg[3];
+            const a5 = jmbg[4];
+            const a6 = jmbg[5];
+            const a7 = jmbg[6];
+            const a8 = jmbg[7];
+            const a9 = jmbg[8];
+            const a10 = jmbg[9];
+            const a11 = jmbg[10];
+            const a12 = jmbg[11];
+            const k = jmbg[12];
+
+            console.log(k)
+            const suma = 7*a1 + 6*a2 +5*a3 + 4*a4 + 3*a5 + 2*a6 + 7*a7 + 6*a8 + 5*a9 + 4*a10 + 3*a11 + 2*a12; 
+ 
+            const m = suma % 11;
+            const o = 11 - m;
+      
+        
+           if (o == k) {
+            alert ('Matični broj je ispravan po algoritmu!')
+           }else{
+            alert('JMBG nije ispravan po algoritmu!');
+           }
+        }  
+                 const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
 
         axios.post(url, {
             ime: imeRef.current.value,
@@ -57,7 +86,7 @@ function Modal(props) {
             jmbgRef.current.value = "";
             
             alert('Dodali ste novog pacijenta!');
-        })
+        }) 
     }
 
    function handle(e){
