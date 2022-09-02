@@ -78,7 +78,6 @@ function Edit(props) {
     })  
 }
 
-console.log(data.grad)
 
 function handle(e){
     const index = e.target.children[e.target.selectedIndex].dataset.id;
@@ -105,10 +104,11 @@ return (
      <input type="number" id="jmbg" ref={jmbgRef} defaultValue={props.podaci.jmbg}  />
  </div>
  <div className="grad">
- <select className="gradovi" onChange={handle} >
+ <select className="gradovi" onChange={handle}  >
+    <option>{props.podaci.grad}</option>
                     {items.map(item => (
-                      <option className="listaGradova" data-id={item.id_grad} > 
-                        { item.naziv }   
+                      <option defaultValue={item.grad} className="listaGradova" data-id={item.id_grad} > 
+                        { item.naziv  } 
                         </option> 
                      ))}
                 </select>

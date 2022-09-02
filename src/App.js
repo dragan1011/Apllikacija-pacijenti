@@ -88,7 +88,7 @@ if (nameValue.length >= 1 ) {
         prezime: item[1],
         ime: item[2],
         jmbg: item[3],
-        grad: pomocnaVarijabla !== -1 ? items[pomocnaVarijabla].naziv : ""
+        grad: pomocnaVarijabla !== -1 ? items[pomocnaVarijabla].naziv : "",
       }
     });
     setData(transformedData);

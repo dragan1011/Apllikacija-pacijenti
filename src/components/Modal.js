@@ -116,7 +116,7 @@ function Modal(props) {
              <div className="grad">             
                   <select className="gradovi" onChange={handle}>
                     {props.gradovi.map(item => (
-                      <option className="listaGradova" data-id={item.id_grad} > 
+                                  <option className="listaGradova" data-id={item.id_grad} > 
                         { item.naziv }   
                         </option> 
                      ))}
@@ -133,4 +133,3 @@ function Modal(props) {
 }
 
 export default Modal
-
