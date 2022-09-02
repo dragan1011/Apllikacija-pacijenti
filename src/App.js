@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react"; 
+import { useEffect, useReducer, useState } from "react"; 
 import './App.css';
 import Modal from './components/Modal.js'
 import Pacijenti from "./components/Pacijenti";
@@ -15,6 +15,7 @@ const [data, setData] = useState([]);
 const [nameValue, setNameValue] = useState('')
 const [jmbgValue, setJMBGValue] = useState('')
 
+
 const fetchGradovi = async () => {
   const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
   const data = await response.json();
@@ -29,8 +30,9 @@ const fetchGradovi = async () => {
   setItems(transformedData);
 }
 
+
 useEffect(() => {
- fetchGradovi();
+  fetchGradovi();
 }, []);
 
 

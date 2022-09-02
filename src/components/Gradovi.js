@@ -6,6 +6,8 @@ import { useState, useRef } from "react";
 
 function Gradovi({closeModal}) {
 
+
+ 
   
   const gradRef = useRef();
 
@@ -32,6 +34,7 @@ function Gradovi({closeModal}) {
         console.log(res.data);
         closeModal(false)
         alert('Dodali ste novi grad!');
+        window.location.reload(false);
     })
 }
 

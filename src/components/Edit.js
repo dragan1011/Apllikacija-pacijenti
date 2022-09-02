@@ -3,6 +3,7 @@ import './Pacijenti.css';
 import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import './Edit.css'
+import Pacijenti from './Pacijenti';
 
 function Edit(props) {
 
@@ -74,7 +75,7 @@ function Edit(props) {
     })
     .then(res=> {      
         alert('Uspješno ste napravili izmjene!');
-        props.closeModal(false)
+        props.closeModal(false);
     })  
 }
 
