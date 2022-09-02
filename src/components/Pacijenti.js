@@ -12,7 +12,7 @@ function Pacijenti(props) {
     e.preventDefault();
     e.target.parentElement.parentElement.remove();
     console.log(id)
-    axios.post(`http://81.93.66.18:8234/api2.cfc?method=pacijent_obrisi&id=${id}`)
+    axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${id}`)
     .then(res=> {
         console.log(res.data);
        alert('Pacijent je obrisan!')

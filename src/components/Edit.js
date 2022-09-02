@@ -18,7 +18,7 @@ function Edit(props) {
     const [items, setItems] = useState([]);
 
     const fetchGradovi = async () => {
-        const response = await fetch("http://81.93.66.18:8234//api.cfc?method=gradovi_lista");
+        const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
         const data = await response.json();
       
         const transformedData = data.gradovi.DATA.map(item => {
@@ -64,7 +64,7 @@ function Edit(props) {
     console.log(imeRef.current.value);
     console.log(prezimeRef.current.value);
     console.log(jmbgRef.current.value);
-            const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}&id=${props.podaci.id}`;
+            const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}&id=${props.podaci.id}`;
 
     axios.post(url, {
         ime: imeRef.current.value,
