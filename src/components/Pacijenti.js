@@ -7,9 +7,13 @@ function Pacijenti(props) {
   const [formData,setFormData] = useState([]);
   const [openModal,setOpenModal] = useState(false);
 
+  
 
   function deletePatient(id, e) {
     e.preventDefault();
+    
+    if (window.confirm('Da li ste sigurni da želite obrisati pacijenta?')) {
+     
     e.target.parentElement.parentElement.remove();
     console.log(id)
     axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${id}`)
@@ -18,6 +22,7 @@ function Pacijenti(props) {
        alert('Pacijent je obrisan!')
        console.log(props.pacijenti)
     })
+}
 }
 
 function editPatient(id,ime, prezime,jmbg, grad) {
@@ -68,7 +73,7 @@ function editPatient(id,ime, prezime,jmbg, grad) {
         {openModal && <Edit closeModal={setOpenModal} podaci={formData}></Edit>}
       </table>
   
-          
+         
         );
 
 }

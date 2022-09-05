@@ -6,13 +6,15 @@ import Gradovi from './Gradovi'
 
 function Modal(props) {
 
+    console.log(props.ime)
+
     console.log(props.gradovi);
     const [openModal, setOpenModal] = useState(false);
 
     const imeRef = useRef();
     const prezimeRef = useRef();
     const jmbgRef = useRef();
-
+    const gradRef = useRef();
 
     const [data, setData] = useState({
         ime:"",
@@ -20,10 +22,9 @@ function Modal(props) {
         jmbg:"",
         grad:''
     })
-
+  
     function submit(e) {
         e.preventDefault();
-
         if (imeRef.current.value.trim() === '' || imeRef.current.value.trim() === null) {
             return alert('Morate unijeti ime pacijenta! ')
         }
@@ -71,6 +72,9 @@ function Modal(props) {
             alert('JMBG nije ispravan po algoritmu!');
            }
         }  
+
+
+
                  const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
 
         axios.post(url, {
@@ -115,8 +119,9 @@ function Modal(props) {
              </div>
              <div className="grad">             
                   <select className="gradovi" onChange={handle}>
+                    <option   className="listaGradova">Izaberite grad</option>
                     {props.gradovi.map(item => (
-                                  <option className="listaGradova" data-id={item.id_grad} > 
+                                  <option ref={gradRef} className="listaGradova" data-id={item.id_grad} > 
                         { item.naziv }   
                         </option> 
                      ))}

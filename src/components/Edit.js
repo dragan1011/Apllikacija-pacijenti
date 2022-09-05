@@ -3,7 +3,6 @@ import './Pacijenti.css';
 import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import './Edit.css'
-import Pacijenti from './Pacijenti';
 
 function Edit(props) {
 
@@ -11,12 +10,14 @@ function Edit(props) {
     const imeRef = useRef();
     const prezimeRef = useRef();
     const jmbgRef = useRef();
+    const gradRef = useRef();
 
     const [data, setData] = useState({
         grad:''
     })
     
     const [items, setItems] = useState([]);
+
 
     const fetchGradovi = async () => {
         const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
@@ -38,7 +39,6 @@ function Edit(props) {
       
 
       console.log(items)
-      
 
 
  function submit(e) {
@@ -66,7 +66,7 @@ function Edit(props) {
     console.log(prezimeRef.current.value);
     console.log(jmbgRef.current.value);
             const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}&id=${props.podaci.id}`;
-
+      
     axios.post(url, {
         ime: imeRef.current.value,
         prezime: prezimeRef.current.value,
@@ -106,7 +106,7 @@ return (
  </div>
  <div className="grad">
  <select className="gradovi" onChange={handle}  >
-    <option>{props.podaci.grad}</option>
+    <option ref={gradRef}>{props.podaci.grad}</option>
                     {items.map(item => (
                       <option defaultValue={item.grad} className="listaGradova" data-id={item.id_grad} > 
                         { item.naziv  } 

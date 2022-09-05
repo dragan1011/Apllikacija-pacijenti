@@ -19,7 +19,7 @@ function Gradovi({closeModal}) {
 
     console.log(gradRef.current.value);
     if (gradRef.current.value.trim() === '' || gradRef.current.value.trim() === null) {
-        return alert('Morate nazziv grada! ')
+        return alert('Morate naziv grada! ')
     }
     if (gradRef.current.value.trim().length <= 2) {
         return alert ('Morate unijeti više od dva karaktera!')
@@ -34,7 +34,6 @@ function Gradovi({closeModal}) {
         console.log(res.data);
         closeModal(false)
         alert('Dodali ste novi grad!');
-        window.location.reload(false);
     })
 }
 

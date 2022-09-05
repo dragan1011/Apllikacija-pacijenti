@@ -16,7 +16,7 @@ const [nameValue, setNameValue] = useState('')
 const [jmbgValue, setJMBGValue] = useState('')
 
 
-const fetchGradovi = async () => {
+ const fetchGradovi = async () => {
   const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
   const data = await response.json();
 
@@ -29,6 +29,8 @@ const fetchGradovi = async () => {
   });
   setItems(transformedData);
 }
+
+
 
 
 useEffect(() => {
