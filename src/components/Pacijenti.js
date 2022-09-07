@@ -38,6 +38,7 @@ function editPatient(id,ime, prezime,jmbg, grad) {
 }
 
 
+
   return (
     <table className="tabela">
 

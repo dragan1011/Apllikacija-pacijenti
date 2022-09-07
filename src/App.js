@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useReducer, useState } from "react"; 
+import { useEffect, useState } from "react"; 
 import './App.css';
 import Modal from './components/Modal.js'
 import Pacijenti from "./components/Pacijenti";
@@ -31,17 +31,17 @@ const [jmbgValue, setJMBGValue] = useState('')
 }
 
 
-
-
 useEffect(() => {
   fetchGradovi();
 }, []);
 
 
+const getJmbgHandler = (jmbg) => {
+  console.log(jmbg);
+}
+
  function search(e) {
-e.preventDefault();
-if (nameValue.length >= 1 ) {
- 
+  if (nameValue.length >= 1 ) {
   e.preventDefault();
 
   if (nameValue.trim() ===  '' || nameValue.trim() === null) {
@@ -113,7 +113,8 @@ if (nameValue.length >= 1 ) {
           <button type="submit" className="search-trazi" >Traži</button>
           <button className="dodaj" type="button" onClick={()=>{setOpenModal(true)} }>Dodaj pacijenta</button> 
           </form>
-               { openModal && <Modal gradovi={items} mbroj={data} closeModal={setOpenModal} />}
+
+               { openModal && <Modal getJmbg={getJmbgHandler} gradovi={items} mbroj={data} closeModal={setOpenModal} />}
           </div>
           {isSearching && <Pacijenti pacijenti={data}/>}
                </header>

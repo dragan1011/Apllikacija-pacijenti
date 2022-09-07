@@ -6,9 +6,6 @@ import { useState, useRef } from "react";
 
 function Gradovi({closeModal}) {
 
-
- 
-  
   const gradRef = useRef();
 
   const [data, setData] = useState({
@@ -33,6 +30,8 @@ function Gradovi({closeModal}) {
     .then(res=> {
         console.log(res.data);
         closeModal(false)
+        window.location.reload(false);
+
         alert('Dodali ste novi grad!');
     })
 }

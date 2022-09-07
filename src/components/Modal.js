@@ -25,6 +25,7 @@ function Modal(props) {
   
     function submit(e) {
         e.preventDefault();
+        props.getJmbg(jmbgRef.current.value);
         if (imeRef.current.value.trim() === '' || imeRef.current.value.trim() === null) {
             return alert('Morate unijeti ime pacijenta! ')
         }
@@ -66,14 +67,14 @@ function Modal(props) {
             const o = 11 - m;
       
         
-           if (o == k) {
+           if (o === k) {
             alert ('Matični broj je ispravan po algoritmu!')
            }else{
             alert('JMBG nije ispravan po algoritmu!');
            }
         }  
 
-
+    
 
                  const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
 
@@ -88,7 +89,9 @@ function Modal(props) {
             imeRef.current.value = "";
             prezimeRef.current.value = "";
             jmbgRef.current.value = "";
-            
+
+
+
             alert('Dodali ste novog pacijenta!');
         }) 
     }
