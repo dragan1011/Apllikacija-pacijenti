@@ -19,10 +19,11 @@ function Edit(props) {
     const [items, setItems] = useState([]);
 
 
-    const fetchGradovi = async () => {
+     const fetchGradovi = async () => {
         const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
         const data = await response.json();
-      
+    
+
         const transformedData = data.gradovi.DATA.map(item => {
           
           return {
@@ -38,7 +39,6 @@ function Edit(props) {
       }, []);
       
 
-      console.log(items)
 
 
  function submit(e) {
@@ -83,9 +83,10 @@ function Edit(props) {
 function handle(e){
     const index = e.target.children[e.target.selectedIndex].dataset.id;
     const newdata={grad: index}
-    console.log(newdata)
     setData(newdata)
    }
+
+  
 
 return (
 

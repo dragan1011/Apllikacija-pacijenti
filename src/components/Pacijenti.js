@@ -40,6 +40,7 @@ function editPatient(id,ime, prezime,jmbg, grad) {
 
 
   return (
+    <div className="tabela-div">
     <table className="tabela">
 
 <tr className="heading">
@@ -73,7 +74,7 @@ function editPatient(id,ime, prezime,jmbg, grad) {
         ))}
         {openModal && <Edit closeModal={setOpenModal} podaci={formData}></Edit>}
       </table>
-  
+      </div>
          
         );
 

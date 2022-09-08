@@ -89,9 +89,10 @@
   }
 }
 
-@media only screen and (max-width: 200px) {
+@media only screen and (max-width: 350) {
   .search{
-    width: 100%;
+    width: 50%;
     margin-bottom: 25px;
   }
+
 }

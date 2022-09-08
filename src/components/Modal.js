@@ -72,7 +72,8 @@ function Modal(props) {
            }else{
             alert('JMBG nije ispravan po algoritmu!');
            }
-        }  
+        } 
+        
 
     
 
@@ -89,8 +90,6 @@ function Modal(props) {
             imeRef.current.value = "";
             prezimeRef.current.value = "";
             jmbgRef.current.value = "";
-
-
 
             alert('Dodali ste novog pacijenta!');
         }) 
@@ -122,7 +121,7 @@ function Modal(props) {
              </div>
              <div className="grad">             
                   <select className="gradovi" onChange={handle}>
-                    <option   className="listaGradova">Izaberite grad</option>
+                    <option  className="listaGradova">Izaberite grad</option>
                     {props.gradovi.map(item => (
                                   <option ref={gradRef} className="listaGradova" data-id={item.id_grad} > 
                         { item.naziv }   
