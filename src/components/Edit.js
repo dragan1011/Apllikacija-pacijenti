@@ -19,11 +19,10 @@ function Edit(props) {
     const [items, setItems] = useState([]);
 
 
-     const fetchGradovi = async () => {
-        const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
+    const fetchGradovi = async () => {
+        const response = await fetch("http://81.93.66.18:8234/api2.cfc?method=gradovi_lista");
         const data = await response.json();
-    
-
+      
         const transformedData = data.gradovi.DATA.map(item => {
           
           return {
@@ -39,10 +38,12 @@ function Edit(props) {
       }, []);
       
 
+     
 
 
  function submit(e) {
      e.preventDefault();
+     props.refresh(jmbgRef.current.value);
     if (imeRef.current.value.trim() === '' || imeRef.current.value.trim() === null) {
         return alert('Morate unijeti ime pacijenta! ')
     }
@@ -61,11 +62,7 @@ function Edit(props) {
     if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
         return alert ('Morate unijeti tačno 13 karaktera!')
     }
-
-    console.log(imeRef.current.value);
-    console.log(prezimeRef.current.value);
-    console.log(jmbgRef.current.value);
-            const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}&id=${props.podaci.id}`;
+            const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${data.grad ? +data.grad : gradRef.current.dataset.id}&id=${props.podaci.id}`;
       
     axios.post(url, {
         ime: imeRef.current.value,
@@ -86,7 +83,7 @@ function handle(e){
     setData(newdata)
    }
 
-  
+
 
 return (
 
@@ -107,7 +104,7 @@ return (
  </div>
  <div className="grad">
  <select className="gradovi" onChange={handle}  >
-    <option ref={gradRef}>{props.podaci.grad}</option>
+    <option className='listaGradova' data-id={props.podaci.id_grad} ref={gradRef}>{props.podaci.grad}</option>
                     {items.map(item => (
                       <option defaultValue={item.grad} className="listaGradova" data-id={item.id_grad} > 
                         { item.naziv  } 

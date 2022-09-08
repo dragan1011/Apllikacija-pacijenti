@@ -71,15 +71,15 @@ th{
     }
 
   }
+
+
   @media only screen and (max-width: 350px) {
 
 
-   .tabela-div{
-    overflow-x: auto;
+    .tabela-div{
+     overflow-x: auto;
+    }
+ 
+ 
+ 
    }
-
-
-    
-  }
-
-

@@ -6,9 +6,7 @@ import Gradovi from './Gradovi'
 
 function Modal(props) {
 
-    console.log(props.ime)
 
-    console.log(props.gradovi);
     const [openModal, setOpenModal] = useState(false);
 
     const imeRef = useRef();
@@ -60,7 +58,7 @@ function Modal(props) {
             const a12 = jmbg[11];
             const k = jmbg[12];
 
-            console.log(k)
+        
             const suma = 7*a1 + 6*a2 +5*a3 + 4*a4 + 3*a5 + 2*a6 + 7*a7 + 6*a8 + 5*a9 + 4*a10 + 3*a11 + 2*a12; 
  
             const m = suma % 11;
@@ -72,12 +70,9 @@ function Modal(props) {
            }else{
             alert('JMBG nije ispravan po algoritmu!');
            }
-        } 
-        
+        }  
 
-    
-
-                 const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
+        const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
 
         axios.post(url, {
             ime: imeRef.current.value,
@@ -86,11 +81,11 @@ function Modal(props) {
             id_grad: +data.grad
         })
         .then(res=> {
-            console.log(res.data);
             imeRef.current.value = "";
             prezimeRef.current.value = "";
             jmbgRef.current.value = "";
-
+            props.closeModal(false)
+            
             alert('Dodali ste novog pacijenta!');
         }) 
     }
@@ -98,7 +93,6 @@ function Modal(props) {
    function handle(e){
     const index = e.target.children[e.target.selectedIndex].dataset.id;
     const newdata={...data, grad: index}
-    console.log(newdata)
     setData(newdata)
    }
 
@@ -121,7 +115,7 @@ function Modal(props) {
              </div>
              <div className="grad">             
                   <select className="gradovi" onChange={handle}>
-                    <option  className="listaGradova">Izaberite grad</option>
+                    <option   className="listaGradova">Izaberite grad</option>
                     {props.gradovi.map(item => (
                                   <option ref={gradRef} className="listaGradova" data-id={item.id_grad} > 
                         { item.naziv }   

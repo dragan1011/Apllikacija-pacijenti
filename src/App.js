@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react"; 
+import React ,{ useEffect, useState } from "react"; 
 import './App.css';
 import Modal from './components/Modal.js'
 import Pacijenti from "./components/Pacijenti";
@@ -17,7 +17,7 @@ const [jmbgValue, setJMBGValue] = useState('')
 
 
  const fetchGradovi = async () => {
-  const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
+  const response = await fetch("http://81.93.66.18:8234/api2.cfc?method=gradovi_lista");
   const data = await response.json();
 
   const transformedData = data.gradovi.DATA.map(item => {
@@ -37,7 +37,26 @@ useEffect(() => {
 
 
 const getJmbgHandler = (jmbg) => {
-  console.log(jmbg);
+
+  return setTimeout(()=> {axios
+    .get(`http://81.93.66.18:8234/api2.cfc?method=pacijent_trazi&jmbg=${jmbg}`)
+    .then((response)=> {
+      const transformedData = response.data.lista_pacijenata.DATA.map(item => {
+        let pomocnaVarijabla = '';
+        pomocnaVarijabla = items.findIndex(grad => {return grad.id_grad === item[4]});
+        return {
+          id: item[0],
+          prezime: item[1],
+          ime: item[2],
+          jmbg: item[3],
+          grad: pomocnaVarijabla !== -1 ? items[pomocnaVarijabla].naziv : "",
+          grad_id: item[4]
+        }
+      });
+      setData(transformedData);
+      setIsSearching(true);
+    })
+    .catch((err) => console.log(err))}, 1000) 
 }
 
  function search(e) {
@@ -52,9 +71,8 @@ const getJmbgHandler = (jmbg) => {
   }
   
   return axios
-  .get(`http://172.18.1.73:8080/api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
+  .get(`http://81.93.66.18:8234/api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
   .then((response)=> {
-    console.log(response.data.lista_pacijenata.DATA);
     const transformedData = response.data.lista_pacijenata.DATA.map(item => {
       let pomocnaVarijabla = '';
       pomocnaVarijabla = items.findIndex(grad => {return grad.id_grad === item[4]});
@@ -63,7 +81,8 @@ const getJmbgHandler = (jmbg) => {
         prezime: item[1],
         ime: item[2],
         jmbg: item[3],
-        grad: pomocnaVarijabla !== -1 ? items[pomocnaVarijabla].naziv : ""
+        grad: pomocnaVarijabla !== -1 ? items[pomocnaVarijabla].naziv : "",
+        grad_id: item[4]
       }
     });
     setData(transformedData);
@@ -81,9 +100,8 @@ const getJmbgHandler = (jmbg) => {
   }
   
   return axios
-  .get(`http://172.18.1.73:8080/api2.cfc?method=pacijent_trazi&jmbg=${jmbgValue}`)
+  .get(`http://81.93.66.18:8234/api2.cfc?method=pacijent_trazi&jmbg=${jmbgValue}`)
   .then((response)=> {
-    console.log(response.data.lista_pacijenata.DATA);
     const transformedData = response.data.lista_pacijenata.DATA.map(item => {
       let pomocnaVarijabla = '';
       pomocnaVarijabla = items.findIndex(grad => {return grad.id_grad === item[4]});
@@ -93,6 +111,7 @@ const getJmbgHandler = (jmbg) => {
         ime: item[2],
         jmbg: item[3],
         grad: pomocnaVarijabla !== -1 ? items[pomocnaVarijabla].naziv : "",
+        grad_id: item[4]
       }
     });
     setData(transformedData);
@@ -116,7 +135,7 @@ const getJmbgHandler = (jmbg) => {
 
                { openModal && <Modal getJmbg={getJmbgHandler} gradovi={items} mbroj={data} closeModal={setOpenModal} />}
           </div>
-          {isSearching && <Pacijenti pacijenti={data}/>}
+          {isSearching && <Pacijenti getJmbg={getJmbgHandler} pacijenti={data}/>}
                </header>
                
     </div>

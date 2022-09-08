@@ -15,23 +15,21 @@ function Pacijenti(props) {
     if (window.confirm('Da li ste sigurni da želite obrisati pacijenta?')) {
      
     e.target.parentElement.parentElement.remove();
-    console.log(id)
-    axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${id}`)
+    axios.post(`http://81.93.66.18:8234/api2.cfc?method=pacijent_obrisi&id=${id}`)
     .then(res=> {
-        console.log(res.data);
        alert('Pacijent je obrisan!')
-       console.log(props.pacijenti)
     })
 }
 }
 
-function editPatient(id,ime, prezime,jmbg, grad) {
+function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
   const data = {
     id: id,
     ime: ime,
     prezime: prezime,
     jmbg: jmbg,
-    grad: grad
+    grad: grad,
+    id_grad: id_grad
   }
   setFormData(data);
   setOpenModal(true);
@@ -40,7 +38,10 @@ function editPatient(id,ime, prezime,jmbg, grad) {
 
 
   return (
+
+
     <div className="tabela-div">
+
     <table className="tabela">
 
 <tr className="heading">
@@ -65,16 +66,16 @@ function editPatient(id,ime, prezime,jmbg, grad) {
             {item.grad}
            </th>
            <th >
-           <input type="button" className="edit" value="Izmjena"   onClick={() => editPatient(item.id,item.ime, item.prezime,item.jmbg, item.grad)}  />
+           <input type="button" className="edit" value="Izmjena"   onClick={() => editPatient(item.id,item.ime, item.prezime,item.jmbg, item.grad,item.grad_id)}  />
                      </th>
            <th>
            <input type="submit" onClick={(e) => deletePatient(item.id, e)} className="delete" value="Izbriši" />
            </th>
           </tr>
         ))}
-        {openModal && <Edit closeModal={setOpenModal} podaci={formData}></Edit>}
+        {openModal && <Edit refresh={props.getJmbg} closeModal={setOpenModal} podaci={formData}></Edit>}
       </table>
-      </div>
+  </div>
          
         );
 
