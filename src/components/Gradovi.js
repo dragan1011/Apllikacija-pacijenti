@@ -22,7 +22,7 @@ function Gradovi({closeModal}) {
         return alert ('Morate unijeti više od dva karaktera!')
     }
   
-    const url = `http://81.93.66.18:8234/api2.cfc?method=gradovi_unos&naziv=${gradRef.current.value}`;
+    const url = `http://172.18.1.73:8080/api2.cfc?method=gradovi_unos&naziv=${gradRef.current.value}`;
     
     axios.post(url, {
       grad: gradRef.current.value,
@@ -40,7 +40,6 @@ function Gradovi({closeModal}) {
     const newdata={...data}
     newdata[e.target.id] = e.target.value
     setData(newdata)
-    console.log(newdata)
    }
 
     return (

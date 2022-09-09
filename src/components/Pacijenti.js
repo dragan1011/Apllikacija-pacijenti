@@ -11,11 +11,11 @@ function Pacijenti(props) {
 
   function deletePatient(id, e) {
     e.preventDefault();
-    
-    if (window.confirm('Da li ste sigurni da želite obrisati pacijenta?')) {
+
+   if (window.confirm('Da li ste sigurni da želite obrisati pacijenta?')) {
      
     e.target.parentElement.parentElement.remove();
-    axios.post(`http://81.93.66.18:8234/api2.cfc?method=pacijent_obrisi&id=${id}`)
+    axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${id}`)
     .then(res=> {
        alert('Pacijent je obrisan!')
     })
@@ -40,11 +40,16 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
   return (
 
 
-    <div className="tabela-div">
 
-    <table className="tabela">
 
-<tr className="heading">
+    
+<div className="tabela-div">
+  
+    <table className="tabela--tabela_pacijenti">
+
+
+<tbody>
+<tr className="tr--header_tr">
   <th>JMBG</th>
   <th>IME</th>
   <th>PREZIME</th>
@@ -52,7 +57,8 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
 </tr>
 
         {props.pacijenti.map(item => (
-          <tr key={item.id} className="lista">
+          <div  key={item.id}>
+          <tr className="tr--main_dio_tabele">
            <th>
            {item.jmbg}
            </th>
@@ -66,17 +72,24 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
             {item.grad}
            </th>
            <th >
-           <input type="button" className="edit" value="Izmjena"   onClick={() => editPatient(item.id,item.ime, item.prezime,item.jmbg, item.grad,item.grad_id)}  />
+           <input type="button" className="th--button_1" value="Izmjena"   onClick={() => editPatient(item.id,item.ime, item.prezime,item.jmbg, item.grad,item.grad_id)}  />
                      </th>
            <th>
-           <input type="submit" onClick={(e) => deletePatient(item.id, e)} className="delete" value="Izbriši" />
+           <input type="submit" onClick={(e) => deletePatient(item.id, e)} className="th--button_2" value="Izbriši" />
            </th>
+           
           </tr>
+
+          </div>
         ))}
         {openModal && <Edit refresh={props.getJmbg} closeModal={setOpenModal} podaci={formData}></Edit>}
+        </tbody>
+       
       </table>
-  </div>
-         
+
+      </div>  
+
+   
         );
 
 }
