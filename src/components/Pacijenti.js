@@ -15,7 +15,7 @@ function Pacijenti(props) {
    if (window.confirm('Da li ste sigurni da želite obrisati pacijenta?')) {
      
     e.target.parentElement.parentElement.remove();
-    axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${id}`)
+    axios.post(`http://81.93.66.18:8234/api2.cfc?method=pacijent_obrisi&id=${id}`)
     .then(res=> {
        alert('Pacijent je obrisan!')
     })
@@ -43,18 +43,24 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
 
 
     
-<div className="tabela-div">
+
   
     <table className="tabela--tabela_pacijenti">
 
-
-<tbody>
+<thead>
 <tr className="tr--header_tr">
   <th>JMBG</th>
   <th>IME</th>
   <th>PREZIME</th>
   <th>GRAD</th>
+  <th></th>
+  <th></th>
 </tr>
+</thead>
+
+
+<tbody>
+
 
         {props.pacijenti.map(item => (
           <div  key={item.id}>
@@ -87,7 +93,7 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
        
       </table>
 
-      </div>  
+
 
    
         );
