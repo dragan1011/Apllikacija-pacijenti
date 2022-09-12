@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import './Pacijenti.css'
 import axios from "axios";
 import Edit from './Edit.js'
+import { AlertModalDelete, AlertModalDeleteConfirmation } from "./AlertModal";
 
 function Pacijenti(props) {
   const [formData,setFormData] = useState([]);
-  const [openModal,setOpenModal] = useState(false);
 
+
+  const [openModal,setOpenModal] = useState(false);
+  const [openModalDelete,setOpenModalDelete] = useState(false);
   
+ 
 
   function deletePatient(id, e) {
     e.preventDefault();
@@ -15,9 +19,9 @@ function Pacijenti(props) {
    if (window.confirm('Da li ste sigurni da želite obrisati pacijenta?')) {
      
     e.target.parentElement.parentElement.remove();
-    axios.post(`http://81.93.66.18:8234/api2.cfc?method=pacijent_obrisi&id=${id}`)
+    axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${id}`)
     .then(res=> {
-       alert('Pacijent je obrisan!')
+      setOpenModalDelete(true)
     })
 }
 }
@@ -88,7 +92,9 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
 
           </div>
         ))}
+        {openModalDelete && <AlertModalDelete closeAlertModalDelete={setOpenModalDelete} />}
         {openModal && <Edit refresh={props.getJmbg} closeModal={setOpenModal} podaci={formData}></Edit>}
+        
         </tbody>
        
       </table>

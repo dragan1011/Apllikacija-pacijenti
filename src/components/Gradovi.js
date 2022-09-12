@@ -3,10 +3,13 @@ import React from "react"
 import './Gradovi.css'
 import axios from "axios";
 import { useState, useRef } from "react";
+import { AlertModalAddGrad } from "./AlertModal";
 
 function Gradovi({closeModal}) {
 
   const gradRef = useRef();
+
+  const [openAlertModalAddGrad, setopenAlertModalAddGrad] = useState(false);
 
   const [data, setData] = useState({
       grad:""
@@ -22,17 +25,14 @@ function Gradovi({closeModal}) {
         return alert ('Morate unijeti više od dva karaktera!')
     }
   
-    const url = `http://81.93.66.18:8234/api2.cfc?method=gradovi_unos&naziv=${gradRef.current.value}`;
+    const url = `http://172.18.1.73:8080/api2.cfc?method=gradovi_unos&naziv=${gradRef.current.value}`;
     
     axios.post(url, {
       grad: gradRef.current.value,
     })
     .then(res=> {
         console.log(res.data);
-        closeModal(false)
-        window.location.reload(false);
-
-        alert('Dodali ste novi grad!');
+        window.location.reload(false)  
     })
 }
 
@@ -53,6 +53,7 @@ function Gradovi({closeModal}) {
              </div>
              <input type="submit" className="add"  value="Dodaj" />
              <input type="button" onClick={()=>closeModal(false)} className="exit" value="Odustani" />
+             {openAlertModalAddGrad && <AlertModalAddGrad closeAlertModalAddGrad={setopenAlertModalAddGrad}/>}
              </form>
         </div>
 

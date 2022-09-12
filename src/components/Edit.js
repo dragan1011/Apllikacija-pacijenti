@@ -3,6 +3,7 @@ import './Pacijenti.css';
 import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import './Edit.css'
+import { AlertModalEdit } from './AlertModal';
 
 function Edit(props) {
 
@@ -19,8 +20,12 @@ function Edit(props) {
     const [items, setItems] = useState([]);
 
 
+    const [openModalEdit,setOpenModalEdit] = useState(false);
+
+
+
     const fetchGradovi = async () => {
-        const response = await fetch("http://81.93.66.18:8234/api2.cfc?method=gradovi_lista");
+        const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
         const data = await response.json();
       
         const transformedData = data.gradovi.DATA.map(item => {
@@ -59,7 +64,7 @@ function Edit(props) {
     if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
         return alert ('Morate unijeti tačno 13 karaktera!')
     }
-            const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${data.grad ? +data.grad : gradRef.current.dataset.id}&id=${props.podaci.id}`;
+            const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${data.grad ? +data.grad : gradRef.current.dataset.id}&id=${props.podaci.id}`;
       
     axios.post(url, {
         ime: imeRef.current.value,
@@ -68,8 +73,7 @@ function Edit(props) {
         id_grad: +data.grad
     })
     .then(res=> {      
-        alert('Uspješno ste napravili izmjene!');
-        props.closeModal(false);
+        setOpenModalEdit(true)
     })  
 }
 
@@ -111,6 +115,7 @@ return (
  </div>
  <input type="submit" className="add"  value="Sacuvaj" />
  <input type="button" className="exit" onClick={() => props.closeModal(false)}  value="Odustani" />
+ {openModalEdit && <AlertModalEdit closeAlertModalEdit={setOpenModalEdit} />}
  </form>
 </div>
 )

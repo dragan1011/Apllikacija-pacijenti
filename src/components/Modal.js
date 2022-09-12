@@ -3,11 +3,16 @@ import React, { useRef } from "react"
 import { useState } from "react";
 import './Modal.css'
 import Gradovi from './Gradovi'
+import {AlertModalAdd,AlertModalDobarJMBG, AlertModalLosJMBG} from './AlertModal.js'
 
 function Modal(props) {
 
 
     const [openModal, setOpenModal] = useState(false);
+    const [openAlertModalAdd, setOpenAlertModalAdd] = useState(false);
+    const [openAlertModalDobarJMBG, setOpenAlertModalDobarJMBG] = useState(false);
+    const [openAlertModalLosJMBG, setOpenAlertModalLosJMBG] = useState(false);
+
 
     const imeRef = useRef();
     const prezimeRef = useRef();
@@ -65,14 +70,14 @@ function Modal(props) {
             const o = 11 - m;
       
         
-           if (o === k) {
-            alert ('Matični broj je ispravan po algoritmu!')
+           if (o == k) {
+            setOpenAlertModalDobarJMBG(true)
            }else{
-            alert('JMBG nije ispravan po algoritmu!');
+            setOpenAlertModalLosJMBG(true)
            }
         }  
         props.getJmbg(jmbgRef.current.value);
-        const url = `http://81.93.66.18:8234/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
+        const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
 
         axios.post(url, {
             ime: imeRef.current.value,
@@ -84,9 +89,7 @@ function Modal(props) {
             imeRef.current.value = "";
             prezimeRef.current.value = "";
             jmbgRef.current.value = "";
-            props.closeModal(false)
-            
-            alert('Dodali ste novog pacijenta!');
+            setOpenAlertModalAdd(true)
         }) 
     }
 
@@ -126,6 +129,9 @@ function Modal(props) {
              </div>
              <input type="submit" className="add"  value="Dodaj" />
              <input type="button" onClick={()=>props.closeModal(false)} className="exit" value="Odustani" />
+             {openAlertModalAdd && <AlertModalAdd closeAlertModal={setOpenAlertModalAdd} />}
+             {openAlertModalDobarJMBG && <AlertModalDobarJMBG closeAlertModalDobarJMBG={setOpenAlertModalDobarJMBG} />}
+             {openAlertModalLosJMBG && <AlertModalLosJMBG closeAlertModalLosJmbg={setOpenAlertModalLosJMBG} />}
              </form>
              { openModal && <Gradovi closeModal={setOpenModal} />}
         </div>
