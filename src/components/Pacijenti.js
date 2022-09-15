@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import './Pacijenti.css'
 import axios from "axios";
 import Edit from './Edit.js'
@@ -6,25 +6,47 @@ import { AlertModalDelete, AlertModalDeleteConfirmation } from "./AlertModal";
 
 function Pacijenti(props) {
   const [formData,setFormData] = useState([]);
-
-
   const [openModal,setOpenModal] = useState(false);
   const [openModalDelete,setOpenModalDelete] = useState(false);
+  const [dialog, setDialog] = useState({
+    message: '',
+    isLoading: false
+  })
   
- 
+  const idProductRef = useRef()
+
+  const handleDialog = (message, isLoading) => {
+    setDialog({
+      message,
+      isLoading
+    })
+  }
 
   function deletePatient(id, e) {
     e.preventDefault();
-
-   if (window.confirm('Da li ste sigurni da želite obrisati pacijenta?')) {
+    handleDialog('Da li ste sigurni da želite obrisati pacijenta?', true)
+   
+    idProductRef.current = id;
      
-    e.target.parentElement.parentElement.remove();
-    axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${id}`)
+  }
+
+  const areUSureDelete = (e,choose) => {
+
+    console.log(choose)
+    
+    if (choose) {
+    handleDialog('',false)
+
+  
+/*     axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${idProductRef.current}`)
     .then(res=> {
       setOpenModalDelete(true)
-    })
-}
-}
+    }) */
+    }else{
+      handleDialog('',false)
+    }
+
+  }
 
 function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
   const data = {
@@ -40,16 +62,9 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
 }
 
 
-
   return (
 
-
-
-
-    
-
-  
-    <table className="tabela--tabela_pacijenti">
+  <table className="tabela--tabela_pacijenti">
 
 <thead>
 <tr className="tr--header_tr">
@@ -62,10 +77,7 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
 </tr>
 </thead>
 
-
 <tbody>
-
-
         {props.pacijenti.map(item => (
           <div  key={item.id}>
           <tr className="tr--main_dio_tabele">
@@ -82,7 +94,7 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
             {item.grad}
            </th>
            <th >
-           <input type="button" className="th--button_1" value="Izmjena"   onClick={() => editPatient(item.id,item.ime, item.prezime,item.jmbg, item.grad,item.grad_id)}  />
+           <input type="button" className="th--button_1" value="Izmijena"   onClick={() => editPatient(item.id,item.ime, item.prezime,item.jmbg, item.grad,item.grad_id)}  />
                      </th>
            <th>
            <input type="submit" onClick={(e) => deletePatient(item.id, e)} className="th--button_2" value="Izbriši" />
@@ -93,16 +105,13 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
           </div>
         ))}
         {openModalDelete && <AlertModalDelete closeAlertModalDelete={setOpenModalDelete} />}
+        { dialog.isLoading && <AlertModalDeleteConfirmation onDialog={areUSureDelete} message={dialog.message} />}
         {openModal && <Edit refresh={props.getJmbg} closeModal={setOpenModal} podaci={formData}></Edit>}
         
         </tbody>
        
       </table>
-
-
-
-   
-        );
+      );
 
 }
 

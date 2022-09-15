@@ -3,6 +3,7 @@ import React ,{ useEffect, useState } from "react";
 import './App.css';
 import Modal from './components/Modal.js'
 import Pacijenti from "./components/Pacijenti";
+import {AlertModalKarakteriZaPretragu, AlertModalViseOdTriKaraktera} from './components/AlertModal.js'
 
 function App() {
 
@@ -10,6 +11,8 @@ const [items, setItems] = useState([]);
 const [isSearching, setIsSearching] =useState(false);
 
 const [openModal, setOpenModal] = useState(false)
+const [openAlertModalKarakteriZaPretragu, setOpenAlertModalKarakteriZaPretragu] = useState(false)
+const [openAlertModalViseOdTriKaraktera, setOpenAlertModalViseOdTriKaraktera] = useState(false)
 
 const [data, setData] = useState([]);
 const [nameValue, setNameValue] = useState('')
@@ -64,10 +67,10 @@ const getJmbgHandler = (jmbg) => {
   e.preventDefault();
 
   if (nameValue.trim() ===  '' || nameValue.trim() === null) {
-    return alert('Morate unijeti karaktere za pretragu!');
+    return setOpenAlertModalKarakteriZaPretragu(true)
   }
   if (nameValue.trim().length >= 1 && nameValue.trim().length <= 3) {
-    return alert('Morate unijeti više od tri karaktera za pretragu!')
+    return setOpenAlertModalViseOdTriKaraktera(true)
   }
   
   return axios
@@ -93,10 +96,10 @@ const getJmbgHandler = (jmbg) => {
   e.preventDefault();
 
   if (jmbgValue.trim() ===  '' || jmbgValue.trim() === null) {
-    return alert('Morate unijeti karaktere za pretragu!');
+    return setOpenAlertModalKarakteriZaPretragu(true)
   }
   if (jmbgValue.trim().length >= 1 && jmbgValue.trim().length <= 3) {
-    return alert('Morate unijeti više od tri karaktera za pretragu!')
+    return setOpenAlertModalViseOdTriKaraktera(true)
   }
   
   return axios
@@ -126,7 +129,7 @@ const getJmbgHandler = (jmbg) => {
       <header className="App-header">
       <div className="search-container">
         <div className="patients">Evidencija pacijenata</div>
-        <form onSubmit={search}>
+        <form onSubmit={search} autocomplete="off">
         <input  type="number" onChange={(e) => setJMBGValue(e.target.value)} className="search" placeholder="JMBG..." />
         <input value={nameValue} type="text" onChange={(e) => setNameValue(e.target.value)} className="search" placeholder="Ime ili prezime..." />
           <button type="submit" className="search-trazi" >Traži</button>
@@ -134,6 +137,8 @@ const getJmbgHandler = (jmbg) => {
           </form>
 
                { openModal && <Modal getJmbg={getJmbgHandler} gradovi={items} mbroj={data} closeModal={setOpenModal} />}
+               { openAlertModalViseOdTriKaraktera && <AlertModalViseOdTriKaraktera closeAlertModalViseOdTriKaraktera={setOpenAlertModalViseOdTriKaraktera} />}
+               { openAlertModalKarakteriZaPretragu && <AlertModalKarakteriZaPretragu closeAlertModalKarakteriZaPretragu={setOpenAlertModalKarakteriZaPretragu} />}
           </div>
           {isSearching && <Pacijenti getJmbg={getJmbgHandler} pacijenti={data}/>}
                </header>

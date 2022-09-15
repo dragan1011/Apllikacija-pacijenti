@@ -3,7 +3,15 @@ import './Pacijenti.css';
 import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import './Edit.css'
-import { AlertModalEdit } from './AlertModal';
+import { AlertModalEdit,
+         AlertModalDobarJMBG,
+         AlertModalLosJMBG,
+         AlertModalImePacijenta,
+         AlertModalPrezimePacijenta,
+         AlertModalViseOdDvaKaraktera, 
+         AlertModalJMBGPacijenta,
+         AlertModalJMBGTacnoKaraktera} from './AlertModal.js'
+
 
 function Edit(props) {
 
@@ -21,6 +29,15 @@ function Edit(props) {
 
 
     const [openModalEdit,setOpenModalEdit] = useState(false);
+
+
+    const [openAlertModalDobarJMBG, setOpenAlertModalDobarJMBG] = useState(false);
+    const [openAlertModalLosJMBG, setOpenAlertModalLosJMBG] = useState(false);
+    const [openAlertModalImePacijenta, setOpenAlertModalImePacijenta] = useState(false);
+    const [openAlertModalViseOdDvaKaraktera, setOpenAlertModalViseOdDvaKaraktera] = useState(false);
+    const [openAlertModalPrezimePacijenta, setOpenAlertModalPrezimePacijenta] = useState(false);
+    const [openAlertModalJMBGPacijenta, setOpenAlertModalJMBGPacijenta] = useState(false);
+    const [openAlertModalJMBGTacnoKaraktera, setOpenAlertModalJMBGTacnoKaraktera] = useState(false);
 
 
 
@@ -45,25 +62,26 @@ function Edit(props) {
 
  function submit(e) {
      e.preventDefault();
-     props.refresh(jmbgRef.current.value);
+     
     if (imeRef.current.value.trim() === '' || imeRef.current.value.trim() === null) {
-        return alert('Morate unijeti ime pacijenta! ')
+        return setOpenAlertModalImePacijenta(true)
     }
     if (imeRef.current.value.trim().length <= 2) {
-        return alert ('Morate unijeti više od dva karaktera!')
+        return setOpenAlertModalViseOdDvaKaraktera(true)
     }
     if (prezimeRef.current.value.trim() === '' || prezimeRef.current.value.trim() === null) {
-        return alert('Morate unijeti prezime pacijenta!')
+        return setOpenAlertModalPrezimePacijenta(true)
     }
     if (prezimeRef.current.value.trim().length <= 2) {
-        return alert ('Morate unijeti više od dva karaktera!')
+        return setOpenAlertModalViseOdDvaKaraktera(true)
     }
     if (jmbgRef.current.value.trim() === '' || jmbgRef.current.value.trim() === null) {
-        return alert ('Morate unijeti matični broj pacijenta!')
+        return setOpenAlertModalJMBGPacijenta(true)
     }
     if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
-        return alert ('Morate unijeti tačno 13 karaktera!')
+        return setOpenAlertModalJMBGTacnoKaraktera(true)
     }
+    props.refresh(jmbgRef.current.value);
             const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${data.grad ? +data.grad : gradRef.current.dataset.id}&id=${props.podaci.id}`;
       
     axios.post(url, {
@@ -89,7 +107,7 @@ function handle(e){
 return (
 
 <div className="form-container">
-<form onSubmit={(e) => submit(e)}>
+<form onSubmit={(e) => submit(e)} autocomplete="off">
 <div className="div-close">
     <span className="close"  onClick={() => props.closeModal(false)}  >✖</span></div>
     <span className="title">Izmjena podataka pacijenta</span>
@@ -113,9 +131,17 @@ return (
                      ))}
                 </select>
  </div>
- <input type="submit" className="add"  value="Sacuvaj" />
+ <input type="submit" className="add width"  value="Sačuvaj" />
  <input type="button" className="exit" onClick={() => props.closeModal(false)}  value="Odustani" />
  {openModalEdit && <AlertModalEdit closeAlertModalEdit={setOpenModalEdit} />}
+ {openAlertModalDobarJMBG && <AlertModalDobarJMBG closeAlertModalDobarJMBG={setOpenAlertModalDobarJMBG} />}
+ {openAlertModalLosJMBG && <AlertModalLosJMBG closeAlertModalLosJmbg={setOpenAlertModalLosJMBG} />}
+ {openAlertModalImePacijenta && <AlertModalImePacijenta closeAlertModalImePacijenta={setOpenAlertModalImePacijenta} />}
+ {openAlertModalViseOdDvaKaraktera && <AlertModalViseOdDvaKaraktera closeAlertModalViseOdDvaKaraktera={setOpenAlertModalViseOdDvaKaraktera} />}
+ {openAlertModalPrezimePacijenta && <AlertModalPrezimePacijenta closeAlertModalPrezimePacijenta={setOpenAlertModalPrezimePacijenta} />}
+ {openAlertModalJMBGPacijenta && <AlertModalJMBGPacijenta closeAlertModaJMBGPacijenta={setOpenAlertModalJMBGPacijenta} />}
+ {openAlertModalJMBGTacnoKaraktera && <AlertModalJMBGTacnoKaraktera closeAlertModalJMBGTacnoKaraktera={setOpenAlertModalJMBGTacnoKaraktera} />}
+           
  </form>
 </div>
 )

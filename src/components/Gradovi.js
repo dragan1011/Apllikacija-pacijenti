@@ -44,7 +44,7 @@ function Gradovi({closeModal}) {
 
     return (
         <div className="form-container">
-            <form  onSubmit={(e)=> submit(e)}>
+            <form  onSubmit={(e)=> submit(e)} autocomplete="off">
             <div className="div-close">
                 <span className="close" onClick={()=>closeModal(false)} >✖</span></div>
                 <span className="title">Dodajte naziv grada</span>

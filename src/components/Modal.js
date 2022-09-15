@@ -3,7 +3,13 @@ import React, { useRef } from "react"
 import { useState } from "react";
 import './Modal.css'
 import Gradovi from './Gradovi'
-import {AlertModalAdd,AlertModalDobarJMBG, AlertModalLosJMBG} from './AlertModal.js'
+import {AlertModalAdd,AlertModalDobarJMBG,
+        AlertModalLosJMBG,
+        AlertModalImePacijenta,
+        AlertModalPrezimePacijenta,
+        AlertModalViseOdDvaKaraktera, 
+        AlertModalJMBGPacijenta,
+        AlertModalJMBGTacnoKaraktera} from './AlertModal.js'
 
 function Modal(props) {
 
@@ -12,6 +18,12 @@ function Modal(props) {
     const [openAlertModalAdd, setOpenAlertModalAdd] = useState(false);
     const [openAlertModalDobarJMBG, setOpenAlertModalDobarJMBG] = useState(false);
     const [openAlertModalLosJMBG, setOpenAlertModalLosJMBG] = useState(false);
+    const [openAlertModalImePacijenta, setOpenAlertModalImePacijenta] = useState(false);
+    const [openAlertModalViseOdDvaKaraktera, setOpenAlertModalViseOdDvaKaraktera] = useState(false);
+    const [openAlertModalPrezimePacijenta, setOpenAlertModalPrezimePacijenta] = useState(false);
+    const [openAlertModalJMBGPacijenta, setOpenAlertModalJMBGPacijenta] = useState(false);
+    const [openAlertModalJMBGTacnoKaraktera, setOpenAlertModalJMBGTacnoKaraktera] = useState(false);
+ 
 
 
     const imeRef = useRef();
@@ -30,22 +42,22 @@ function Modal(props) {
         e.preventDefault();
        
         if (imeRef.current.value.trim() === '' || imeRef.current.value.trim() === null) {
-            return alert('Morate unijeti ime pacijenta! ')
+            return setOpenAlertModalImePacijenta(true)
         }
         if (imeRef.current.value.trim().length <= 2) {
-            return alert ('Morate unijeti više od dva karaktera!')
+            return setOpenAlertModalViseOdDvaKaraktera(true)
         }
         if (prezimeRef.current.value.trim() === '' || prezimeRef.current.value.trim() === null) {
-            return alert('Morate unijeti prezime pacijenta!')
+            return setOpenAlertModalPrezimePacijenta(true)
         }
         if (prezimeRef.current.value.trim().length <= 2) {
-            return alert ('Morate unijeti više od dva karaktera!')
+            return setOpenAlertModalViseOdDvaKaraktera(true)
         }
         if (jmbgRef.current.value.trim() === '' || jmbgRef.current.value.trim() === null) {
-            return alert ('Morate unijeti matični broj pacijenta!')
+            return setOpenAlertModalJMBGPacijenta(true)
         }
         if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
-            return alert ('Morate unijeti tačno 13 karaktera!')
+            return setOpenAlertModalJMBGTacnoKaraktera(true)
         }
        if (jmbgRef.current.value.trim().length === 13 ) {
             const jmbg = jmbgRef.current.value.trim();
@@ -102,7 +114,7 @@ function Modal(props) {
    
     return (
         <div className="form-container">
-            <form onSubmit={(e)=> submit(e)}>
+            <form onSubmit={(e)=> submit(e)} autocomplete="off">
             <div className="div-close">
                 <span className="close" onClick={()=>props.closeModal(false)}>✖</span></div>
                 <span className="title">Dodajte novog pacijenta</span>
@@ -125,14 +137,19 @@ function Modal(props) {
                         </option> 
                      ))}
                 </select>
-                <input type="button" onClick={() => {setOpenModal(true)}} className="add dodaj"  value="Dodaj novi grad" />
+                <input type="button" onClick={() => {setOpenModal(true)}} className="add dodaj widthG"  value="Dodaj novi grad" />
              </div>
              <input type="submit" className="add"  value="Dodaj" />
              <input type="button" onClick={()=>props.closeModal(false)} className="exit" value="Odustani" />
              {openAlertModalAdd && <AlertModalAdd closeAlertModal={setOpenAlertModalAdd} />}
              {openAlertModalDobarJMBG && <AlertModalDobarJMBG closeAlertModalDobarJMBG={setOpenAlertModalDobarJMBG} />}
              {openAlertModalLosJMBG && <AlertModalLosJMBG closeAlertModalLosJmbg={setOpenAlertModalLosJMBG} />}
-             </form>
+             {openAlertModalImePacijenta && <AlertModalImePacijenta closeAlertModalImePacijenta={setOpenAlertModalImePacijenta} />}
+             {openAlertModalViseOdDvaKaraktera && <AlertModalViseOdDvaKaraktera closeAlertModalViseOdDvaKaraktera={setOpenAlertModalViseOdDvaKaraktera} />}
+             {openAlertModalPrezimePacijenta && <AlertModalPrezimePacijenta closeAlertModalPrezimePacijenta={setOpenAlertModalPrezimePacijenta} />}
+             {openAlertModalJMBGPacijenta && <AlertModalJMBGPacijenta closeAlertModaJMBGPacijenta={setOpenAlertModalJMBGPacijenta} />}
+             {openAlertModalJMBGTacnoKaraktera && <AlertModalJMBGTacnoKaraktera closeAlertModalJMBGTacnoKaraktera={setOpenAlertModalJMBGTacnoKaraktera} />}
+              </form>
              { openModal && <Gradovi closeModal={setOpenModal} />}
         </div>
 

@@ -8,11 +8,8 @@
   transform: translate(-50%, -50%);
   width: 400px;
   background: white;
-  border-radius: 10px;
-  box-shadow: 10px 11px 22px 3px rgba(0,0,0,0.65);
--webkit-box-shadow: 10px 11px 22px 3px rgba(0,0,0,0.65);
--moz-box-shadow: 10px 11px 22px 3px rgba(0,0,0,0.65);
   padding: 50px 50px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .div-close{
@@ -28,26 +25,26 @@
 }
 .title{
   color: #adadad;
-  font-weight: bold;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .name{
   position: relative;
-  border: 2px solid #adadad;
-  border-radius: 15px;
   margin: 30px 0;
 }
 .name input{
-  width: 100%;
   padding: 0 5px;
+  margin-right: 1rem;
+  width: 100%;
   height: 40px;
+  border: 1px solid #cccccc;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  border: none;
-  background: none;
-  outline: none;
-  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  text-align: left;
+  background-color: #FFFFFF;
   color: #adadad;
-  font-weight: bold;
-}
+ }
 .name input::placeholder{
   color: #adadad;
 }
@@ -68,43 +65,55 @@ div .search::-webkit-outer-spin-button,
 }
 
 .add{
-  width: 100%;
-  height: 50px;
-  border: 1px solid;
-  background: #2691d9;
-  border-radius: 25px;
-  font-size: 18px;
-  color: #e9f4fb;
-  cursor: pointer;
-  outline: none;
-  font-family: 'Roboto', sans-serif;
-  letter-spacing: 2px;
-  font-weight: bold;
+  width: 20%;
+  border:1px solid #77d5f7;
+  background-color:#0078ae;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:bold; 
+  font-size:18px;
+  font-weight:normal;
+  color:#ffffff;
+  padding:1px;
+  cursor:pointer;
+  height:35px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  padding: 0 10px;
+  text-shadow:1px 1px 0px #063A46;
+  text-transform: uppercase;
+  margin-right: 1rem;
 }
 .add:hover{
-  border-color: #2691d9;
-  transition: .5s;
-  
+  border:1px solid #448dae;
+  background-color:#79c9ec;
+  color:#026890;
+  text-shadow:1px 1px 0px #fff;
 }
 
 .exit{
-  width: 100%;
-  height: 50px;
-  border: 1px solid;
-  background: #db4646;
-  border-radius: 25px;
-  font-size: 18px;
-  color: #e9f4fb;
-  cursor: pointer;
-  outline: none;
-  font-family: 'Roboto', sans-serif;
-  margin-top: 20px;
-  letter-spacing: 2px;
-  font-weight: bold;
+  border:1px solid #fa9789fa;
+  background-color: #d12f19;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:bold; 
+  font-size:18px;
+  font-weight:normal;
+  color:#ffffff;
+  padding: 0 10px;
+  cursor:pointer;
+  height:35px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  padding: 4px;
+  text-transform: uppercase;
+  line-height: 24px;
 }
 .exit:hover{
-  border-color: #db4646;
-  transition: .5s;
+  border:1px solid #d12f19;
+  background-color:#fa9789fa;
+  color:#c52c17d8;
+  text-shadow:1px 1px 0px #fff;
 }
 
 .options{
@@ -115,9 +124,9 @@ div .search::-webkit-outer-spin-button,
   border: none;
   background: none;
   outline: none;
-  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
   color: #adadad;
-  font-weight: bold;
   border: none;
 }
 .nameJMBG::-webkit-outer-spin-button,
@@ -140,19 +149,16 @@ margin: 0 0 25px 0;
   border: none;
   background: none;
   outline: none;
-  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
   color: #adadad;
-  font-weight: bold;
 }
 
 .listaGradova{
   font-size: 25px;
-  border: none;
-  background: none;
-  outline: none;
-  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
   color: #adadad;
-  font-weight: bold;
   margin: 40px;
   background: rgba(0, 0, 0, 0.3);
   color: white;
@@ -160,4 +166,8 @@ margin: 0 0 25px 0;
 }
 .dodaj{
   margin-left: 30px;
+}
+
+.widthG{
+ width: 46%;
 }

@@ -155,24 +155,186 @@ export function AlertModalDeleteConfirmation(props) {
         <div className="div-alert-close">
           <span
             className="alert-close"
-                      >
+            onClick={() => props.onDialog(false)} 
+              >
             ✖
           </span>
         </div>
         <span className="alert-title">{props.message}</span>
         <input
           type="button"
-          className="alert-exit"
+          className="alert-delete"
           value="Obriši"
-          onClick={()=> props.onDialog(true)}
-        />
+            onClick={(e) => props.onDialog(e,true)}      />
         <input
           type="button"
           className="alert-exit"
           value="Odustani"
-          onClick={()=> props.onDialog(false)}
+          onClick={(e) => props.onDialog(e,false)} 
         />
       </form>
     </div>
   );
+}
+export function AlertModalImePacijenta(props) {
+      return (
+            <div className="form-alert-container">
+              <form>
+                <div className="div-alert-close">
+                  <span
+                    className="alert-close"
+                    onClick={() => props.closeAlertModalImePacijenta(false)}
+                  >
+                    ✖
+                  </span>
+                </div>
+                <span className="alert-title">Morate unijeti ime pacijenta!</span>
+                <input
+                  type="button"
+                  className="alert-exit"
+                  onClick={() => props.closeAlertModalImePacijenta(false)}
+                  value="OK"
+                />
+              </form>
+            </div>
+          );
+}
+export function AlertModalViseOdDvaKaraktera(props) {
+      return (
+            <div className="form-alert-container">
+              <form>
+                <div className="div-alert-close">
+                  <span
+                    className="alert-close"
+                    onClick={() => props.closeAlertModalViseOdDvaKaraktera(false)}
+                  >
+                    ✖
+                  </span>
+                </div>
+                <span className="alert-title">Morate unijeti više od dva karaktera!</span>
+                <input
+                  type="button"
+                  className="alert-exit"
+                  onClick={() => props.closeAlertModalViseOdDvaKaraktera(false)}
+                  value="OK"
+                />
+              </form>
+            </div>
+          );
+}
+
+export function AlertModalPrezimePacijenta(props) {
+      return (
+            <div className="form-alert-container">
+              <form>
+                <div className="div-alert-close">
+                  <span
+                    className="alert-close"
+                    onClick={() => props.closeAlertModalPrezimePacijenta(false)}
+                  >
+                    ✖
+                  </span>
+                </div>
+                <span className="alert-title">Morate unijeti prezime pacijenta!</span>
+                <input
+                  type="button"
+                  className="alert-exit"
+                  onClick={() => props.closeAlertModalPrezimePacijenta(false)}
+                  value="OK"
+                />
+              </form>
+            </div>
+          );
+}
+export function AlertModalJMBGPacijenta(props) {
+      return (
+            <div className="form-alert-container">
+              <form>
+                <div className="div-alert-close">
+                  <span
+                    className="alert-close"
+                    onClick={() => props.closeAlertModaJMBGPacijenta(false)}
+                  >
+                    ✖
+                  </span>
+                </div>
+                <span className="alert-title">Morate unijeti matični broj pacijenta!</span>
+                <input
+                  type="button"
+                  className="alert-exit"
+                  onClick={() => props.closeAlertModaJMBGPacijenta(false)}
+                  value="OK"
+                />
+              </form>
+            </div>
+          );
+}
+export function AlertModalJMBGTacnoKaraktera(props) {
+      return (
+            <div className="form-alert-container">
+              <form>
+                <div className="div-alert-close">
+                  <span
+                    className="alert-close"
+                    onClick={() => props.closeAlertModalJMBGTacnoKaraktera(false)}
+                  >
+                    ✖
+                  </span>
+                </div>
+                <span className="alert-title">Morate unijeti tačno 13 karaktera!</span>
+                <input
+                  type="button"
+                  className="alert-exit"
+                  onClick={() => props.closeAlertModalJMBGTacnoKaraktera(false)}
+                  value="OK"
+                />
+              </form>
+            </div>
+          );
+}
+export function AlertModalViseOdTriKaraktera(props) {
+      return (
+            <div className="form-alert-container">
+              <form>
+                <div className="div-alert-close">
+                  <span
+                    className="alert-close"
+                    onClick={() => props.closeAlertModalViseOdTriKaraktera(false)}
+                  >
+                    ✖
+                  </span>
+                </div>
+                <span className="alert-title">Morate unijeti više od tri karaktera!</span>
+                <input
+                  type="button"
+                  className="alert-exit"
+                  onClick={() => props.closeAlertModalViseOdTriKaraktera(false)}
+                  value="OK"
+                />
+              </form>
+            </div>
+          );
+}
+export function AlertModalKarakteriZaPretragu(props) {
+      return (
+            <div className="form-alert-container">
+              <form>
+                <div className="div-alert-close">
+                  <span
+                    className="alert-close"
+                    onClick={() => props.closeAlertModalKarakteriZaPretragu(false)}
+                  >
+                    ✖
+                  </span>
+                </div>
+                <span className="alert-title">Morate unijeti karaktere za pretragu!</span>
+                <input
+                  type="button"
+                  className="alert-exit"
+                  onClick={() => props.closeAlertModalKarakteriZaPretragu(false)}
+                  value="OK"
+                />
+              </form>
+            </div>
+          );
 }
