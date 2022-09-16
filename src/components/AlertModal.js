@@ -1,6 +1,8 @@
 import React from "react";
 import "./AlertModal.css";
 
+
+//Potvrdni modal za dodavanje pacijenta
 export function AlertModalAdd(props) {
   return (
     <div className="form-alert-container">
@@ -24,6 +26,8 @@ export function AlertModalAdd(props) {
     </div>
   );
 }
+
+//Potvrdni modal za JMBG po algoritmu
 
 export function AlertModalDobarJMBG(props) {
   return (
@@ -51,6 +55,9 @@ export function AlertModalDobarJMBG(props) {
   );
 }
 
+
+//Modal za JMBG koji nije ispravan po algoritmu
+
 export function AlertModalLosJMBG(props) {
   return (
     <div className="form-alert-container">
@@ -77,6 +84,9 @@ export function AlertModalLosJMBG(props) {
   );
 }
 
+
+//Potvrdni modal da je obrisan pacijent
+
 export function AlertModalDelete(props) {
   return (
     <div className="form-alert-container">
@@ -100,6 +110,8 @@ export function AlertModalDelete(props) {
     </div>
   );
 }
+
+//Potvrdni modal za izvršene izmijene
 
 export function AlertModalEdit(props) {
   return (
@@ -125,6 +137,8 @@ export function AlertModalEdit(props) {
   );
 }
 
+//Potvrdni modal za dodavanje grada
+
 export function AlertModalAddGrad(props) {
   return (
     <div className="form-alert-container">
@@ -148,6 +162,9 @@ export function AlertModalAddGrad(props) {
     </div>
   );
 }
+
+//Modal potvrde za brisanje pacijenta
+
 export function AlertModalDeleteConfirmation(props) {
   return (
     <div className="form-alert-container">
@@ -165,17 +182,20 @@ export function AlertModalDeleteConfirmation(props) {
           type="button"
           className="alert-delete"
           value="Obriši"
-            onClick={(e) => props.onDialog(e,true)}      />
+            onClick={() => props.onDialog(true)}      />
         <input
           type="button"
           className="alert-exit"
           value="Odustani"
-          onClick={(e) => props.onDialog(e,false)} 
+          onClick={() => props.onDialog(false)} 
         />
       </form>
     </div>
   );
 }
+
+//Modal za obavezan unos imena pacijenta
+
 export function AlertModalImePacijenta(props) {
       return (
             <div className="form-alert-container">
@@ -199,6 +219,9 @@ export function AlertModalImePacijenta(props) {
             </div>
           );
 }
+
+//Modal  za obavezan unos više od dva karaktera
+
 export function AlertModalViseOdDvaKaraktera(props) {
       return (
             <div className="form-alert-container">
@@ -223,6 +246,9 @@ export function AlertModalViseOdDvaKaraktera(props) {
           );
 }
 
+
+//Modal za obavezan unos prezimena pacijenta
+
 export function AlertModalPrezimePacijenta(props) {
       return (
             <div className="form-alert-container">
@@ -246,6 +272,9 @@ export function AlertModalPrezimePacijenta(props) {
             </div>
           );
 }
+
+//Modal za obavezan unos JMBG pacijenta
+
 export function AlertModalJMBGPacijenta(props) {
       return (
             <div className="form-alert-container">
@@ -269,6 +298,12 @@ export function AlertModalJMBGPacijenta(props) {
             </div>
           );
 }
+
+
+//Modal za tačan broj karaktera kod obaveznog unosa JMBG pacijenta
+
+
+
 export function AlertModalJMBGTacnoKaraktera(props) {
       return (
             <div className="form-alert-container">
@@ -292,6 +327,10 @@ export function AlertModalJMBGTacnoKaraktera(props) {
             </div>
           );
 }
+
+
+//Modal za obavezan unos više od tri karaktera za pretragu
+
 export function AlertModalViseOdTriKaraktera(props) {
       return (
             <div className="form-alert-container">
@@ -315,6 +354,11 @@ export function AlertModalViseOdTriKaraktera(props) {
             </div>
           );
 }
+
+
+//Modal za obavezan unos karaktera za pretragu
+
+
 export function AlertModalKarakteriZaPretragu(props) {
       return (
             <div className="form-alert-container">

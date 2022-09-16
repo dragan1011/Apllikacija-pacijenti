@@ -14,6 +14,10 @@ function Gradovi({closeModal}) {
   const [data, setData] = useState({
       grad:""
   })
+
+
+   //Dodavanje grada sa validacijom
+
   function submit(e) {
     e.preventDefault();
 
@@ -36,6 +40,9 @@ function Gradovi({closeModal}) {
     })
 }
 
+
+    //Kupljenje unesenih podataka
+
   function handle(e){
     const newdata={...data}
     newdata[e.target.id] = e.target.value
@@ -44,7 +51,7 @@ function Gradovi({closeModal}) {
 
     return (
         <div className="form-container">
-            <form  onSubmit={(e)=> submit(e)} autocomplete="off">
+            <form  onSubmit={(e)=> submit(e)} autoComplete="off">
             <div className="div-close">
                 <span className="close" onClick={()=>closeModal(false)} >✖</span></div>
                 <span className="title">Dodajte naziv grada</span>

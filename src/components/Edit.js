@@ -40,6 +40,7 @@ function Edit(props) {
     const [openAlertModalJMBGTacnoKaraktera, setOpenAlertModalJMBGTacnoKaraktera] = useState(false);
 
 
+    //Pozivanje liste gradova
 
     const fetchGradovi = async () => {
         const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
@@ -59,6 +60,8 @@ function Edit(props) {
        fetchGradovi();
       }, []);
 
+
+      //Izmijena podataka o pacijentu sa validacijom
 
  function submit(e) {
      e.preventDefault();
@@ -96,6 +99,8 @@ function Edit(props) {
 }
 
 
+ //Kupljenje unesenih podataka o pacijentu
+
 function handle(e){
     const index = e.target.children[e.target.selectedIndex].dataset.id;
     const newdata={grad: index}
@@ -107,7 +112,7 @@ function handle(e){
 return (
 
 <div className="form-container">
-<form onSubmit={(e) => submit(e)} autocomplete="off">
+<form onSubmit={(e) => submit(e)} autoComplete="off">
 <div className="div-close">
     <span className="close"  onClick={() => props.closeModal(false)}  >✖</span></div>
     <span className="title">Izmjena podataka pacijenta</span>

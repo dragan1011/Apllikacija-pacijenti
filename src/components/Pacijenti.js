@@ -15,6 +15,8 @@ function Pacijenti(props) {
   
   const idProductRef = useRef()
 
+  const [brisanje,setBrisanje] = useState([]);
+
   const handleDialog = (message, isLoading) => {
     setDialog({
       message,
@@ -22,32 +24,33 @@ function Pacijenti(props) {
     })
   }
 
+  //Brisanje pacijenata
+
   function deletePatient(id, e) {
     e.preventDefault();
     handleDialog('Da li ste sigurni da želite obrisati pacijenta?', true)
-   
+    setBrisanje(e.target.parentElement.parentElement);
     idProductRef.current = id;
-     
   }
 
-  const areUSureDelete = (e,choose) => {
-
-    console.log(choose)
+  //Potvrda za brisanje pacijenata
+  const areUSureDelete = (choose) => {
     
     if (choose) {
     handleDialog('',false)
-
-  
-/*     axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${idProductRef.current}`)
+    brisanje.remove();
+        axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${idProductRef.current}`)
     .then(res=> {
       setOpenModalDelete(true)
-    }) */
+    }) 
     }else{
       handleDialog('',false)
     }
 
   }
 
+
+  //Izmijena podataka o pacijentima
 function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
   const data = {
     id: id,
@@ -61,7 +64,7 @@ function editPatient(id,ime, prezime,jmbg, grad, id_grad) {
   setOpenModal(true);
 }
 
-
+//Prikaz pacijenata
   return (
 
   <table className="tabela--tabela_pacijenti">

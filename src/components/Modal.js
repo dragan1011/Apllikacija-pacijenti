@@ -38,6 +38,8 @@ function Modal(props) {
         grad:''
     })
   
+    //Dodavanje pacijenta sa validacijom
+
     function submit(e) {
         e.preventDefault();
        
@@ -114,7 +116,7 @@ function Modal(props) {
    
     return (
         <div className="form-container">
-            <form onSubmit={(e)=> submit(e)} autocomplete="off">
+            <form onSubmit={(e)=> submit(e)} autoComplete="off">
             <div className="div-close">
                 <span className="close" onClick={()=>props.closeModal(false)}>✖</span></div>
                 <span className="title">Dodajte novog pacijenta</span>

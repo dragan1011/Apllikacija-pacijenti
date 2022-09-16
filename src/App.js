@@ -19,6 +19,8 @@ const [nameValue, setNameValue] = useState('')
 const [jmbgValue, setJMBGValue] = useState('')
 
 
+   //Pozivanje liste gradova
+
  const fetchGradovi = async () => {
   const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
   const data = await response.json();
@@ -38,6 +40,8 @@ useEffect(() => {
   fetchGradovi();
 }, []);
 
+
+//Prikazivanje pacijenta kada se doda ili edituje
 
 const getJmbgHandler = (jmbg) => {
 
@@ -61,6 +65,9 @@ const getJmbgHandler = (jmbg) => {
     })
     .catch((err) => console.log(err))}, 1000) 
 }
+
+
+  //Pretraga pacijenata po imenu ili prezimenu i JMBG
 
  function search(e) {
   if (nameValue.length >= 1 ) {
@@ -129,7 +136,7 @@ const getJmbgHandler = (jmbg) => {
       <header className="App-header">
       <div className="search-container">
         <div className="patients">Evidencija pacijenata</div>
-        <form onSubmit={search} autocomplete="off">
+        <form onSubmit={search} autoComplete="off">
         <input  type="number" onChange={(e) => setJMBGValue(e.target.value)} className="search" placeholder="JMBG..." />
         <input value={nameValue} type="text" onChange={(e) => setNameValue(e.target.value)} className="search" placeholder="Ime ili prezime..." />
           <button type="submit" className="search-trazi" >Traži</button>
