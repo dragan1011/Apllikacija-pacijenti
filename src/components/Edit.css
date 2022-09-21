@@ -18,3 +18,11 @@
     .width{
       width: 25%;
     }
+    .label{
+      color: #adadad;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .position{
+      text-align: left;
+    }

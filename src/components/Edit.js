@@ -116,17 +116,24 @@ return (
 <div className="div-close">
     <span className="close"  onClick={() => props.closeModal(false)}  >✖</span></div>
     <span className="title">Izmjena podataka pacijenta</span>
-<div className="name">
+<div className="name position">
+    <label className='label'>Ime</label>
     <input type="text" id="firstName" ref={imeRef} defaultValue={props.podaci.ime.charAt(0).toUpperCase() + props.podaci.ime.slice(1).toLowerCase()}  />
  </div>
- <div className="name">
+ <div className="name position">
+ <label className='label'>Prezime</label>
      <input type="text" id="lastName"  ref={prezimeRef} defaultValue={props.podaci.prezime.charAt(0).toUpperCase() + props.podaci.prezime.slice(1).toLowerCase()}  />
       
  </div>
- <div className="name jmbg">
+ <div className="name jmbg position">
+ <label className='label'>JMBG</label>
      <input type="number" id="jmbg" ref={jmbgRef} defaultValue={props.podaci.jmbg}  />
  </div>
+ <div className='position'>
+ <label className='label'>Grad</label>
+ </div>
  <div className="grad">
+ 
  <select className="gradovi" onChange={handle}  >
     <option className='listaGradova' data-id={props.podaci.id_grad} ref={gradRef}>{props.podaci.grad}</option>
                     {items.map(item => (

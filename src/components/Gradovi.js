@@ -8,6 +8,8 @@ import { AlertModalAddGrad } from "./AlertModal";
 function Gradovi({closeModal}) {
 
   const gradRef = useRef();
+  const longitRef = useRef();
+  const latRef = useRef();
 
   const [openAlertModalAddGrad, setopenAlertModalAddGrad] = useState(false);
 
@@ -29,15 +31,20 @@ function Gradovi({closeModal}) {
         return alert ('Morate unijeti više od dva karaktera!')
     }
   
-    const url = `http://172.18.1.73:8080/api2.cfc?method=gradovi_unos&naziv=${gradRef.current.value}`;
+    console.log(longitRef.current.value)
+    console.log(latRef.current.value)
+
+   const url = `http://172.18.1.73:8080/api2.cfc?method=gradovi_unos&naziv=${gradRef.current.value}&longit=${longitRef.current.value}&lat=${latRef.current.value}`;
     
     axios.post(url, {
       grad: gradRef.current.value,
+      longit: longitRef.current.value,
+      lat: latRef.current.value
     })
     .then(res=> {
         console.log(res.data);
         window.location.reload(false)  
-    })
+    })  
 }
 
 
@@ -55,8 +62,17 @@ function Gradovi({closeModal}) {
             <div className="div-close">
                 <span className="close" onClick={()=>closeModal(false)} >✖</span></div>
                 <span className="title">Dodajte naziv grada</span>
-            <div className="cityName">
+            <div className="cityName position">
+                <label className="label">Grad</label>
                 <input type="text" id="grad" className="cityName-input" onChange={(e)=>handle(e)} ref={gradRef}  placeholder="Naziv grada" />
+             </div>
+            <div className="cityName position">
+            <label className="label">Longituda</label>
+                <input type="number" step="0.0000001" id="long" className="cityName-input" onChange={(e)=>handle(e)} ref={longitRef}  placeholder="Longituda" />
+             </div>
+            <div className="cityName position">
+            <label className="label">Latituda</label>
+                <input type="number" step="0.0000001" id="lat" className="cityName-input" onChange={(e)=>handle(e)} ref={latRef}  placeholder="Latituda" />
              </div>
              <input type="submit" className="add"  value="Dodaj" />
              <input type="button" onClick={()=>closeModal(false)} className="exit" value="Odustani" />

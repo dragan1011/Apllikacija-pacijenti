@@ -61,6 +61,7 @@ function Modal(props) {
         if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
             return setOpenAlertModalJMBGTacnoKaraktera(true)
         }
+       
        if (jmbgRef.current.value.trim().length === 13 ) {
             const jmbg = jmbgRef.current.value.trim();
             const a1 = jmbg[0];
@@ -120,15 +121,21 @@ function Modal(props) {
             <div className="div-close">
                 <span className="close" onClick={()=>props.closeModal(false)}>✖</span></div>
                 <span className="title">Dodajte novog pacijenta</span>
-            <div className="name">
+            <div className="name position">
+                <label className="label">Ime</label>
                 <input type="text" id="firstName" ref={imeRef} placeholder="Ime" />
              </div>
-             <div className="name">
+             <div className="name position">
+             <label className="label">Prezime</label>
                  <input type="text" id="lastName" ref={prezimeRef} placeholder="Prezime" />
                   
              </div>
-             <div className="name jmbg">
+             <div className="name jmbg position">
+             <label className="label">JMBG</label>
                  <input type="number" id="jmbg" ref={jmbgRef} placeholder="JMBG"/>
+             </div>
+             <div className="position">
+                <label className="label">Grad</label>
              </div>
              <div className="grad">             
                   <select className="gradovi" onChange={handle}>

@@ -29,13 +29,33 @@
     font-family: Arial, Helvetica, sans-serif;
   }
   .cityName{
- 
-    margin: 30px 0;
+  margin: 30px 0;
   }
   .cityName-input{
-    width: 100%;
-    padding: 0 5px;
-    height: 40px;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #adadad;
   }
+  .label{
+    color: #adadad;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .position{
+    text-align: left;
+    margin-top: 0px;
+  }
+  #long::-webkit-outer-spin-button,
+  #long::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+#lat::-webkit-outer-spin-button,
+#lat::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
