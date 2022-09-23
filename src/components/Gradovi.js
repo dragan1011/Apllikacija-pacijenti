@@ -3,7 +3,11 @@ import React from "react"
 import './Gradovi.css'
 import axios from "axios";
 import { useState, useRef } from "react";
-import { AlertModalAddGrad } from "./AlertModal";
+import { AlertModalAddGrad,
+        AlertModalImeGrada,
+        AlertModalLong,
+        AlertModalLat,
+        AlertModalViseOdDvaKaraktera } from "./AlertModal";
 
 function Gradovi({closeModal}) {
 
@@ -12,6 +16,10 @@ function Gradovi({closeModal}) {
   const latRef = useRef();
 
   const [openAlertModalAddGrad, setopenAlertModalAddGrad] = useState(false);
+  const [openAlertModalImeGrada, setopenAlertModalImeGrada] = useState(false);
+  const [openAlertModalLong, setopenAlertModalLong] = useState(false);
+  const [openAlertModalLat, setopenAlertModalLat] = useState(false);
+  const [openAlertModalViseOdDvaKaraktera, setopenAlertModalViseOdDvaKaraktera] = useState(false);
 
   const [data, setData] = useState({
       grad:""
@@ -25,12 +33,24 @@ function Gradovi({closeModal}) {
 
     console.log(gradRef.current.value);
     if (gradRef.current.value.trim() === '' || gradRef.current.value.trim() === null) {
-        return alert('Morate naziv grada! ')
+        return setopenAlertModalImeGrada(true)
     }
     if (gradRef.current.value.trim().length <= 2) {
-        return alert ('Morate unijeti više od dva karaktera!')
+        return setopenAlertModalViseOdDvaKaraktera(true)
     }
-  
+    if (longitRef.current.value.trim() ==='' || longitRef.current.value.trim() === null) {
+        return setopenAlertModalLong(true)   
+    }
+    if (longitRef.current.value.trim().length <= 2) {
+        return setopenAlertModalViseOdDvaKaraktera(true)      
+    }
+    if (latRef.current.value.trim() ==='' || latRef.current.value.trim() === null) {
+        return setopenAlertModalLat(true)     
+    }
+    if (latRef.current.value.trim().length <= 2) {
+        return setopenAlertModalViseOdDvaKaraktera(true)     
+    }
+
     console.log(longitRef.current.value)
     console.log(latRef.current.value)
 
@@ -77,6 +97,10 @@ function Gradovi({closeModal}) {
              <input type="submit" className="add"  value="Dodaj" />
              <input type="button" onClick={()=>closeModal(false)} className="exit" value="Odustani" />
              {openAlertModalAddGrad && <AlertModalAddGrad closeAlertModalAddGrad={setopenAlertModalAddGrad}/>}
+             {openAlertModalImeGrada && <AlertModalImeGrada closeAlertModalImeGrada={setopenAlertModalImeGrada}/>}
+             {openAlertModalLong && <AlertModalLong closeAlertModalLong={setopenAlertModalLong}/>}
+             {openAlertModalLat && <AlertModalLat closeAlertModalLat={setopenAlertModalLat}/>}
+             {openAlertModalViseOdDvaKaraktera && <AlertModalViseOdDvaKaraktera closeAlertModalViseOdDvaKaraktera={setopenAlertModalViseOdDvaKaraktera}/>}
              </form>
         </div>
 

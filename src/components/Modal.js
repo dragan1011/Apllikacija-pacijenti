@@ -9,7 +9,8 @@ import {AlertModalAdd,AlertModalDobarJMBG,
         AlertModalPrezimePacijenta,
         AlertModalViseOdDvaKaraktera, 
         AlertModalJMBGPacijenta,
-        AlertModalJMBGTacnoKaraktera} from './AlertModal.js'
+        AlertModalJMBGTacnoKaraktera,
+        AlertModalOdabirGrada} from './AlertModal.js'
 
 function Modal(props) {
 
@@ -23,6 +24,7 @@ function Modal(props) {
     const [openAlertModalPrezimePacijenta, setOpenAlertModalPrezimePacijenta] = useState(false);
     const [openAlertModalJMBGPacijenta, setOpenAlertModalJMBGPacijenta] = useState(false);
     const [openAlertModalJMBGTacnoKaraktera, setOpenAlertModalJMBGTacnoKaraktera] = useState(false);
+    const [openAlertModalOdabirGrada, setOpenAlertModalJOdabirGrada] = useState(false);
  
 
 
@@ -30,6 +32,7 @@ function Modal(props) {
     const prezimeRef = useRef();
     const jmbgRef = useRef();
     const gradRef = useRef();
+
 
     const [data, setData] = useState({
         ime:"",
@@ -91,8 +94,15 @@ function Modal(props) {
             setOpenAlertModalLosJMBG(true)
            }
         }  
+        console.log(gradRef.current.value)
+
+         if (gradRef.current.value === 'Izaberite grad') {
+            return setOpenAlertModalJOdabirGrada(true)
+        } 
+
         props.getJmbg(jmbgRef.current.value);
-        const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
+       
+         const url = `http://172.18.1.73:8080/api2.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=${+data.grad}`;
 
         axios.post(url, {
             ime: imeRef.current.value,
@@ -104,12 +114,14 @@ function Modal(props) {
             imeRef.current.value = "";
             prezimeRef.current.value = "";
             jmbgRef.current.value = "";
+            gradRef.current.value = "Izraberite grad"
             setOpenAlertModalAdd(true)
-        }) 
+        })  
     }
 
    function handle(e){
     const index = e.target.children[e.target.selectedIndex].dataset.id;
+    console.log(e.target.children[e.target.selectedIndex].dataset.id)
     const newdata={...data, grad: index}
     setData(newdata)
    }
@@ -138,10 +150,10 @@ function Modal(props) {
                 <label className="label">Grad</label>
              </div>
              <div className="grad">             
-                  <select className="gradovi" onChange={handle}>
-                    <option   className="listaGradova">Izaberite grad</option>
+                  <select ref={gradRef} className="gradovi" onChange={handle}>
+                    <option className="listaGradova">Izaberite grad</option>
                     {props.gradovi.map(item => (
-                                  <option key={item.id_grad} ref={gradRef} className="listaGradova" data-id={item.id_grad} > 
+                                  <option key={item.id_grad} className="listaGradova" data-id={item.id_grad} > 
                         { item.naziv }   
                         </option> 
                      ))}
@@ -158,6 +170,7 @@ function Modal(props) {
              {openAlertModalPrezimePacijenta && <AlertModalPrezimePacijenta closeAlertModalPrezimePacijenta={setOpenAlertModalPrezimePacijenta} />}
              {openAlertModalJMBGPacijenta && <AlertModalJMBGPacijenta closeAlertModaJMBGPacijenta={setOpenAlertModalJMBGPacijenta} />}
              {openAlertModalJMBGTacnoKaraktera && <AlertModalJMBGTacnoKaraktera closeAlertModalJMBGTacnoKaraktera={setOpenAlertModalJMBGTacnoKaraktera} />}
+             {openAlertModalOdabirGrada && <AlertModalOdabirGrada closeAlertModalOdabirGrada={setOpenAlertModalJOdabirGrada} />}
               </form>
              { openModal && <Gradovi closeModal={setOpenModal} />}
         </div>

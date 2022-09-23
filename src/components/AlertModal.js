@@ -382,3 +382,107 @@ export function AlertModalKarakteriZaPretragu(props) {
             </div>
           );
 }
+
+
+//Modal za obavezno dodavanje grada kod unosa pacijenta
+export function AlertModalOdabirGrada(props) {
+  return (
+        <div className="form-alert-container">
+          <form>
+            <div className="div-alert-close">
+              <span
+                className="alert-close"
+                onClick={() => props.closeAlertModalOdabirGrada(false)}
+              >
+                ✖
+              </span>
+            </div>
+            <span className="alert-title">Morate izabrati grad za pacijenta!</span>
+            <input
+              type="button"
+              className="alert-exit"
+              onClick={() => props.closeAlertModalOdabirGrada(false)}
+              value="OK"
+            />
+          </form>
+        </div>
+      );
+}
+//Modal za obavezan unos imena grada
+export function AlertModalImeGrada(props) {
+  return (
+        <div className="form-alert-container">
+          <form>
+            <div className="div-alert-close">
+              <span
+                className="alert-close"
+                onClick={() => props.closeAlertModalImeGrada(false)}
+              >
+                ✖
+              </span>
+            </div>
+            <span className="alert-title">Morate unijeti ime grada!</span>
+            <br/>
+            <input
+              type="button"
+              className="alert-exit"
+              onClick={() => props.closeAlertModalImeGrada(false)}
+              value="OK"
+            />
+          </form>
+        </div>
+      );
+}
+
+//Modal za obavezan unos longitude
+export function AlertModalLong(props) {
+  return (
+        <div className="form-alert-container">
+          <form>
+            <div className="div-alert-close">
+              <span
+                className="alert-close"
+                onClick={() => props.closeAlertModalLong(false)}
+              >
+                ✖
+              </span>
+            </div>
+            <span className="alert-title">Morate unijeti longitudu grada!</span>
+            <br/>
+            <input
+              type="button"
+              className="alert-exit"
+              onClick={() => props.closeAlertModalLong(false)}
+              value="OK"
+            />
+          </form>
+        </div>
+      );
+}
+
+
+//Modal za obavezan unos latituda
+export function AlertModalLat(props) {
+  return (
+        <div className="form-alert-container">
+          <form>
+            <div className="div-alert-close">
+              <span
+                className="alert-close"
+                onClick={() => props.closeAlertModalLat(false)}
+              >
+                ✖
+              </span>
+            </div>
+            <span className="alert-title">Morate unijeti latitudu grada!</span>
+            <br/>
+            <input
+              type="button"
+              className="alert-exit"
+              onClick={() => props.closeAlertModalLat(false)}
+              value="OK"
+            />
+          </form>
+        </div>
+      );
+}
