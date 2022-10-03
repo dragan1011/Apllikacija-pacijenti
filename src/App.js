@@ -14,6 +14,9 @@ const [openModal, setOpenModal] = useState(false)
 const [openAlertModalKarakteriZaPretragu, setOpenAlertModalKarakteriZaPretragu] = useState(false)
 const [openAlertModalViseOdTriKaraktera, setOpenAlertModalViseOdTriKaraktera] = useState(false)
 
+
+const [refresh, setRefresh] = useState(false)
+
 const [data, setData] = useState([]);
 const [nameValue, setNameValue] = useState('')
 const [jmbgValue, setJMBGValue] = useState('')
@@ -38,7 +41,7 @@ const [jmbgValue, setJMBGValue] = useState('')
 
 useEffect(() => {
   fetchGradovi();
-}, []);
+}, [refresh]);
 
 
 //Prikazivanje pacijenta kada se doda ili edituje
@@ -143,7 +146,7 @@ const getJmbgHandler = (jmbg) => {
           <button className="dodaj" type="button" onClick={()=>{setOpenModal(true)} }>Dodaj pacijenta</button> 
           </form>
 
-               { openModal && <Modal getJmbg={getJmbgHandler} gradovi={items} mbroj={data} closeModal={setOpenModal} />}
+               { openModal && <Modal refresh={setRefresh} pozoviGradove={fetchGradovi} getJmbg={getJmbgHandler} gradovi={items} mbroj={data} closeModal={setOpenModal} />}
                { openAlertModalViseOdTriKaraktera && <AlertModalViseOdTriKaraktera closeAlertModalViseOdTriKaraktera={setOpenAlertModalViseOdTriKaraktera} />}
                { openAlertModalKarakteriZaPretragu && <AlertModalKarakteriZaPretragu closeAlertModalKarakteriZaPretragu={setOpenAlertModalKarakteriZaPretragu} />}
           </div>

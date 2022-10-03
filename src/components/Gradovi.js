@@ -7,30 +7,34 @@ import { AlertModalAddGrad,
         AlertModalImeGrada,
         AlertModalLong,
         AlertModalLat,
-        AlertModalViseOdDvaKaraktera } from "./AlertModal";
+        AlertModalViseOdDvaKaraktera,
+        AlertModalMess } from "./AlertModal";
 
-function Gradovi({closeModal}) {
+function Gradovi(props) {
 
   const gradRef = useRef();
   const longitRef = useRef();
   const latRef = useRef();
 
-  const [openAlertModalAddGrad, setopenAlertModalAddGrad] = useState(false);
+  const [openAlertModalAddGrad, setopenAlertModalAddGrad] = useState(true);
   const [openAlertModalImeGrada, setopenAlertModalImeGrada] = useState(false);
   const [openAlertModalLong, setopenAlertModalLong] = useState(false);
   const [openAlertModalLat, setopenAlertModalLat] = useState(false);
   const [openAlertModalViseOdDvaKaraktera, setopenAlertModalViseOdDvaKaraktera] = useState(false);
+  const [openAlertModalMess, setopenAlertModalMess] = useState(false);
+  const [message, setMessage] = useState([])
 
   const [data, setData] = useState({
       grad:""
   })
 
 
+
    //Dodavanje grada sa validacijom
 
   function submit(e) {
     e.preventDefault();
-
+    props.pozoviGradove()
     console.log(gradRef.current.value);
     if (gradRef.current.value.trim() === '' || gradRef.current.value.trim() === null) {
         return setopenAlertModalImeGrada(true)
@@ -62,10 +66,28 @@ function Gradovi({closeModal}) {
       lat: latRef.current.value
     })
     .then(res=> {
-        console.log(res.data);
-        window.location.reload(false)  
+        
+        console.log(res.data.error)
+        console.log(res.data.message)
+
+   /*         if (res.data.error === 0) {
+            setMessage(res.data.message)
+            setopenAlertModalMess(true)
+            props.refresh();
+            return  setTimeout(() => {
+                props.closeModal(true)
+                
+              }, "2000")
+              
+            } else{
+                setMessage(res.data.message)
+                setopenAlertModalMess(true)
+            }
+   */
+        
     })  
 }
+
 
 
     //Kupljenje unesenih podataka
@@ -80,7 +102,7 @@ function Gradovi({closeModal}) {
         <div className="form-container">
             <form  onSubmit={(e)=> submit(e)} autoComplete="off">
             <div className="div-close">
-                <span className="close" onClick={()=>closeModal(false)} >✖</span></div>
+                <span className="close" onClick={()=>props.closeModal(false)} >✖</span></div>
                 <span className="title">Dodajte naziv grada</span>
             <div className="cityName position">
                 <label className="label">Grad</label>
@@ -95,12 +117,13 @@ function Gradovi({closeModal}) {
                 <input type="number" step="0.0000001" id="lat" className="cityName-input" onChange={(e)=>handle(e)} ref={latRef}  placeholder="Latituda" />
              </div>
              <input type="submit" className="add"  value="Dodaj" />
-             <input type="button" onClick={()=>closeModal(false)} className="exit" value="Odustani" />
+             <input type="button" onClick={()=>props.closeModal(false)} className="exit" value="Odustani" />
              {openAlertModalAddGrad && <AlertModalAddGrad closeAlertModalAddGrad={setopenAlertModalAddGrad}/>}
              {openAlertModalImeGrada && <AlertModalImeGrada closeAlertModalImeGrada={setopenAlertModalImeGrada}/>}
              {openAlertModalLong && <AlertModalLong closeAlertModalLong={setopenAlertModalLong}/>}
              {openAlertModalLat && <AlertModalLat closeAlertModalLat={setopenAlertModalLat}/>}
              {openAlertModalViseOdDvaKaraktera && <AlertModalViseOdDvaKaraktera closeAlertModalViseOdDvaKaraktera={setopenAlertModalViseOdDvaKaraktera}/>}
+             {openAlertModalMess && <AlertModalMess provideMessage={message} closeAlertModalMess={setopenAlertModalMess}/>}
              </form>
         </div>
 

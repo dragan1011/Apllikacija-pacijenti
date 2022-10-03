@@ -45,7 +45,7 @@ function Modal(props) {
 
     function submit(e) {
         e.preventDefault();
-       
+        console.log(props.pozoviGradove)
         if (imeRef.current.value.trim() === '' || imeRef.current.value.trim() === null) {
             return setOpenAlertModalImePacijenta(true)
         }
@@ -64,7 +64,9 @@ function Modal(props) {
         if (jmbgRef.current.value.trim().length <= 12 || jmbgRef.current.value.trim().length >= 14) {
             return setOpenAlertModalJMBGTacnoKaraktera(true)
         }
-       
+        if (gradRef.current.value === 'Izaberite grad') {
+            return setOpenAlertModalJOdabirGrada(true)
+        }
        if (jmbgRef.current.value.trim().length === 13 ) {
             const jmbg = jmbgRef.current.value.trim();
             const a1 = jmbg[0];
@@ -96,9 +98,6 @@ function Modal(props) {
         }  
         console.log(gradRef.current.value)
 
-         if (gradRef.current.value === 'Izaberite grad') {
-            return setOpenAlertModalJOdabirGrada(true)
-        } 
 
         props.getJmbg(jmbgRef.current.value);
        
@@ -172,7 +171,7 @@ function Modal(props) {
              {openAlertModalJMBGTacnoKaraktera && <AlertModalJMBGTacnoKaraktera closeAlertModalJMBGTacnoKaraktera={setOpenAlertModalJMBGTacnoKaraktera} />}
              {openAlertModalOdabirGrada && <AlertModalOdabirGrada closeAlertModalOdabirGrada={setOpenAlertModalJOdabirGrada} />}
               </form>
-             { openModal && <Gradovi closeModal={setOpenModal} />}
+             { openModal && <Gradovi refresh={props.refresh} pozoviGradove={props.pozoviGradove} closeModal={setOpenModal} />}
         </div>
 
     );

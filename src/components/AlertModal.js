@@ -16,6 +16,7 @@ export function AlertModalAdd(props) {
           </span>
         </div>
         <span className="alert-title">Uspješno ste dodali novog pacijenta</span>
+        <br/>
         <input
           type="button"
           className="alert-exit"
@@ -44,6 +45,7 @@ export function AlertModalDobarJMBG(props) {
         <span className="alert-title">
           Matični broj je ispravan po algoritmu!
         </span>
+        <br/>
         <input
           type="button"
           className="alert-exit"
@@ -73,6 +75,7 @@ export function AlertModalLosJMBG(props) {
         <span className="alert-title">
           Matični broj nije ispravan po algoritmu!
         </span>
+        <br/>
         <input
           type="button"
           className="alert-exit"
@@ -100,6 +103,7 @@ export function AlertModalDelete(props) {
           </span>
         </div>
         <span className="alert-title">Uspješno ste obrisali pacijenta!</span>
+        <br/>
         <input
           type="button"
           className="alert-exit"
@@ -126,6 +130,7 @@ export function AlertModalEdit(props) {
           </span>
         </div>
         <span className="alert-title">Uspješno ste napravili izmijene!</span>
+        <br/>
         <input
           type="button"
           className="alert-exit"
@@ -152,6 +157,7 @@ export function AlertModalAddGrad(props) {
           </span>
         </div>
         <span className="alert-title">Dodali ste novi grad!</span>
+        <br/>
         <input
           type="button"
           className="alert-exit"
@@ -209,6 +215,7 @@ export function AlertModalImePacijenta(props) {
                   </span>
                 </div>
                 <span className="alert-title">Morate unijeti ime pacijenta!</span>
+                <br/>
                 <input
                   type="button"
                   className="alert-exit"
@@ -235,6 +242,7 @@ export function AlertModalViseOdDvaKaraktera(props) {
                   </span>
                 </div>
                 <span className="alert-title">Morate unijeti više od dva karaktera!</span>
+                <br/>
                 <input
                   type="button"
                   className="alert-exit"
@@ -262,6 +270,7 @@ export function AlertModalPrezimePacijenta(props) {
                   </span>
                 </div>
                 <span className="alert-title">Morate unijeti prezime pacijenta!</span>
+                <br/>
                 <input
                   type="button"
                   className="alert-exit"
@@ -288,6 +297,7 @@ export function AlertModalJMBGPacijenta(props) {
                   </span>
                 </div>
                 <span className="alert-title">Morate unijeti matični broj pacijenta!</span>
+                <br/>
                 <input
                   type="button"
                   className="alert-exit"
@@ -317,6 +327,7 @@ export function AlertModalJMBGTacnoKaraktera(props) {
                   </span>
                 </div>
                 <span className="alert-title">Morate unijeti tačno 13 karaktera!</span>
+                <br/>
                 <input
                   type="button"
                   className="alert-exit"
@@ -344,6 +355,7 @@ export function AlertModalViseOdTriKaraktera(props) {
                   </span>
                 </div>
                 <span className="alert-title">Morate unijeti više od tri karaktera!</span>
+                <br/>
                 <input
                   type="button"
                   className="alert-exit"
@@ -372,6 +384,7 @@ export function AlertModalKarakteriZaPretragu(props) {
                   </span>
                 </div>
                 <span className="alert-title">Morate unijeti karaktere za pretragu!</span>
+                <br/>
                 <input
                   type="button"
                   className="alert-exit"
@@ -398,6 +411,7 @@ export function AlertModalOdabirGrada(props) {
               </span>
             </div>
             <span className="alert-title">Morate izabrati grad za pacijenta!</span>
+            <br/>
             <input
               type="button"
               className="alert-exit"
@@ -480,6 +494,32 @@ export function AlertModalLat(props) {
               type="button"
               className="alert-exit"
               onClick={() => props.closeAlertModalLat(false)}
+              value="OK"
+            />
+          </form>
+        </div>
+      );
+}
+
+//Modal za povratnu poruku za unos grada
+export function AlertModalMess(props) {
+  return (
+        <div className="form-alert-container">
+          <form>
+            <div className="div-alert-close">
+              <span
+                className="alert-close"
+                onClick={() => props.closeAlertModalMess(false)}
+              >
+                ✖
+              </span>
+            </div>
+            <span className="alert-title">{props.provideMessage}</span>
+            <br/>
+            <input
+              type="button"
+              className="alert-exit"
+              onClick={() => props.closeAlertModalMess(false)}
               value="OK"
             />
           </form>
