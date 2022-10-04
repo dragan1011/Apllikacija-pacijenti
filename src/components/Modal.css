@@ -43,11 +43,8 @@
   font-weight: normal;
   text-align: left;
   background-color: #FFFFFF;
-  color: #adadad;
  }
-.name input::placeholder{
-  color: #adadad;
-}
+
 
 .name input:focus ~ span::before,
 .name input:valid ~ span::before{

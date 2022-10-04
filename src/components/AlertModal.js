@@ -142,33 +142,6 @@ export function AlertModalEdit(props) {
   );
 }
 
-//Potvrdni modal za dodavanje grada
-
-export function AlertModalAddGrad(props) {
-  return (
-    <div className="form-alert-container">
-      <form>
-        <div className="div-alert-close">
-          <span
-            className="alert-close"
-            onClick={() => props.closeAlertModalAddGrad(false)}
-          >
-            ✖
-          </span>
-        </div>
-        <span className="alert-title">Dodali ste novi grad!</span>
-        <br/>
-        <input
-          type="button"
-          className="alert-exit"
-          onClick={() => props.closeAlertModalAddGrad(false)}
-          value="OK"
-        />
-      </form>
-    </div>
-  );
-}
-
 //Modal potvrde za brisanje pacijenta
 
 export function AlertModalDeleteConfirmation(props) {

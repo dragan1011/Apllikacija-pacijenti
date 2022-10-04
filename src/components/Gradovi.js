@@ -3,8 +3,7 @@ import React from "react"
 import './Gradovi.css'
 import axios from "axios";
 import { useState, useRef } from "react";
-import { AlertModalAddGrad,
-        AlertModalImeGrada,
+import {AlertModalImeGrada,
         AlertModalLong,
         AlertModalLat,
         AlertModalViseOdDvaKaraktera,
@@ -16,7 +15,6 @@ function Gradovi(props) {
   const longitRef = useRef();
   const latRef = useRef();
 
-  const [openAlertModalAddGrad, setopenAlertModalAddGrad] = useState(true);
   const [openAlertModalImeGrada, setopenAlertModalImeGrada] = useState(false);
   const [openAlertModalLong, setopenAlertModalLong] = useState(false);
   const [openAlertModalLat, setopenAlertModalLat] = useState(false);
@@ -70,7 +68,7 @@ function Gradovi(props) {
         console.log(res.data.error)
         console.log(res.data.message)
 
-   /*         if (res.data.error === 0) {
+            if (res.data.error === 0) {
             setMessage(res.data.message)
             setopenAlertModalMess(true)
             props.refresh();
@@ -83,7 +81,7 @@ function Gradovi(props) {
                 setMessage(res.data.message)
                 setopenAlertModalMess(true)
             }
-   */
+   
         
     })  
 }
@@ -118,12 +116,12 @@ function Gradovi(props) {
              </div>
              <input type="submit" className="add"  value="Dodaj" />
              <input type="button" onClick={()=>props.closeModal(false)} className="exit" value="Odustani" />
-             {openAlertModalAddGrad && <AlertModalAddGrad closeAlertModalAddGrad={setopenAlertModalAddGrad}/>}
+    
              {openAlertModalImeGrada && <AlertModalImeGrada closeAlertModalImeGrada={setopenAlertModalImeGrada}/>}
              {openAlertModalLong && <AlertModalLong closeAlertModalLong={setopenAlertModalLong}/>}
              {openAlertModalLat && <AlertModalLat closeAlertModalLat={setopenAlertModalLat}/>}
              {openAlertModalViseOdDvaKaraktera && <AlertModalViseOdDvaKaraktera closeAlertModalViseOdDvaKaraktera={setopenAlertModalViseOdDvaKaraktera}/>}
-             {openAlertModalMess && <AlertModalMess provideMessage={message} closeAlertModalMess={setopenAlertModalMess}/>}
+              {openAlertModalMess && <AlertModalMess provideMessage={message} closeAlertModalMess={ setopenAlertModalMess } /> }
              </form>
         </div>
 
