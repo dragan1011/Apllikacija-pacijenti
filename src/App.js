@@ -25,7 +25,7 @@ const [jmbgValue, setJMBGValue] = useState('')
    //Pozivanje liste gradova
 
  const fetchGradovi = async () => {
-  const response = await fetch("http://172.18.1.73:8080/api2.cfc?method=gradovi_lista");
+  const response = await fetch("http://81.93.66.18:8234/api2.cfc?method=gradovi_lista");
   const data = await response.json();
 
   const transformedData = data.gradovi.DATA.map(item => {
@@ -36,6 +36,7 @@ const [jmbgValue, setJMBGValue] = useState('')
     }
   });
   setItems(transformedData);
+  
 }
 
 
@@ -44,12 +45,19 @@ useEffect(() => {
 }, [refresh]);
 
 
+const refreshFunc = () => {
+
+  setRefresh(prev => !prev) 
+
+}
+
+
 //Prikazivanje pacijenta kada se doda ili edituje
 
 const getJmbgHandler = (jmbg) => {
 
   return setTimeout(()=> {axios
-    .get(`http://172.18.1.73:8080/api2.cfc?method=pacijent_trazi&jmbg=${jmbg}`)
+    .get(`http://81.93.66.18:8234/api2.cfc?method=pacijent_trazi&jmbg=${jmbg}`)
     .then((response)=> {
       const transformedData = response.data.lista_pacijenata.DATA.map(item => {
         let pomocnaVarijabla = '';
@@ -84,7 +92,7 @@ const getJmbgHandler = (jmbg) => {
   }
   
   return axios
-  .get(`http://172.18.1.73:8080/api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
+  .get(`http://81.93.66.18:8234/api2.cfc?method=pacijent_trazi&ime=${nameValue}`)
   .then((response)=> {
     const transformedData = response.data.lista_pacijenata.DATA.map(item => {
       let pomocnaVarijabla = '';
@@ -113,7 +121,7 @@ const getJmbgHandler = (jmbg) => {
   }
   
   return axios
-  .get(`http://172.18.1.73:8080/api2.cfc?method=pacijent_trazi&jmbg=${jmbgValue}`)
+  .get(`http://81.93.66.18:8234/api2.cfc?method=pacijent_trazi&jmbg=${jmbgValue}`)
   .then((response)=> {
     const transformedData = response.data.lista_pacijenata.DATA.map(item => {
       let pomocnaVarijabla = '';
@@ -146,7 +154,7 @@ const getJmbgHandler = (jmbg) => {
           <button className="dodaj" type="button" onClick={()=>{setOpenModal(true)} }>Dodaj pacijenta</button> 
           </form>
 
-               { openModal && <Modal refresh={setRefresh} pozoviGradove={fetchGradovi} getJmbg={getJmbgHandler} gradovi={items} mbroj={data} closeModal={setOpenModal} />}
+               { openModal && <Modal refresh={refreshFunc} pozoviGradove={fetchGradovi} getJmbg={getJmbgHandler} gradovi={items} mbroj={data} closeModal={setOpenModal} />}
                { openAlertModalViseOdTriKaraktera && <AlertModalViseOdTriKaraktera closeAlertModalViseOdTriKaraktera={setOpenAlertModalViseOdTriKaraktera} />}
                { openAlertModalKarakteriZaPretragu && <AlertModalKarakteriZaPretragu closeAlertModalKarakteriZaPretragu={setOpenAlertModalKarakteriZaPretragu} />}
           </div>

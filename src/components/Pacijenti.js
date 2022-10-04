@@ -39,7 +39,7 @@ function Pacijenti(props) {
     if (choose) {
     handleDialog('',false)
     brisanje.remove();
-        axios.post(`http://172.18.1.73:8080/api2.cfc?method=pacijent_obrisi&id=${idProductRef.current}`)
+        axios.post(`http://81.93.66.18:8234/api2.cfc?method=pacijent_obrisi&id=${idProductRef.current}`)
     .then(res=> {
       setOpenModalDelete(true)
     }) 

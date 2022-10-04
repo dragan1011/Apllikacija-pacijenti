@@ -56,8 +56,10 @@ function Gradovi(props) {
     console.log(longitRef.current.value)
     console.log(latRef.current.value)
 
-   const url = `http://172.18.1.73:8080/api2.cfc?method=gradovi_unos&naziv=${gradRef.current.value}&longit=${longitRef.current.value}&lat=${latRef.current.value}`;
-    
+   const url = `http://81.93.66.18:8234/api2.cfc?method=gradovi_unos&naziv=${gradRef.current.value}&longit=${longitRef.current.value}&lat=${latRef.current.value}`;
+   
+   console.log(props.closeModal)
+
     axios.post(url, {
       grad: gradRef.current.value,
       longit: longitRef.current.value,
@@ -72,10 +74,9 @@ function Gradovi(props) {
             setMessage(res.data.message)
             setopenAlertModalMess(true)
             props.refresh();
-            return  setTimeout(() => {
-                props.closeModal(true)
-                
-              }, "2000")
+              setTimeout(() => {
+                props.closeModal(false)
+              }, "1000")
               
             } else{
                 setMessage(res.data.message)
